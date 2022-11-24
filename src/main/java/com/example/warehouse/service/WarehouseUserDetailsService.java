@@ -22,9 +22,9 @@ public class WarehouseUserDetailsService implements UserDetailsService {
                 .map(u -> new User(
                         u.getUsername(),
                         u.getPassword(),
-                        u.getUserRolesList().stream()
-                                .map(r -> new SimpleGrantedAuthority("ROLE_" + r.getName().name()))
-                                .collect(Collectors.toList())
+                        u.getRoles().stream()
+                                .map(role -> new SimpleGrantedAuthority("ROLE_"+ role.getName().name()))
+                                        .collect(Collectors.toList())
                 )).orElseThrow(() -> new UsernameNotFoundException(username + " was not found!"));
     }
 }

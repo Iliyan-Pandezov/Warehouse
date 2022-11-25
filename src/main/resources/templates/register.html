@@ -2,181 +2,183 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
 
-    <title>Online Shop</title>
-    <th:block th:include="~{/fragments/head}"/>
+  <title>Online Shop</title>
+  <th:block th:include="~{/fragments/head}"/>
 </head>
 <body>
 <div class="wrapper">
-    <header th:replace="fragments/nav"></header>
-    <main class="p-5 align-content-center bg-blur my-register-div">
+  <header th:replace="fragments/nav"></header>
+  <main class="p-5 align-content-center bg-blur my-register-div">
 
-        <!-- Navigation -->
+    <!-- Navigation -->
 
-        <h1 class="border-bottom">Register</h1>
-        <div class="d-flex justify-content-center ">
-            <div class="row g-3">
-                <form
-                        class="registration-form"
-                        th:action="@{/users/register}"
-                        th:method="post"
-                        th:object="${userRegistrationDTO}">
+    <h1 class="border-bottom">Register</h1>
 
-                    <div>
-                        <div class="col-auto">
-                            <label for="inputUsername" class="col-form-label ">Username</label>
-                        </div>
+    <div class="d-flex justify-content-center ">
+      <div class="row g-3">
+        <form
+                class="registration-form"
+                th:action="@{/users/register}"
+                th:method="post"
+                th:object="${userRegistrationDTO}">
 
-                        <div class="col-auto">
-                            <input name="username"
-                                   th:field="*{username}"
-                                   th:errorclass="is-invalid"
-                                   required
-                                   minlength="5" maxlength="20"
-                                   type="text"
-                                   id="inputUsername"
-                                   class="form-control"
-                                   aria-describedby="usernameHelpInline"/>
-                            <small id="usernameError"
-                                   class="invalid-feedback bg-danger rounded">Username length must be more than 3
-                                characters</small>
-
-                            <!--                        <small id="usernameUniqueError"-->
-                            <!--                               class=" bg-danger rounded is-invalid">Username is already occupied</small>-->
-                        </div>
-                    </div>
-
-                    <div>
-                        <div class="col-auto">
-                            <label for="inputFirstName" class="col-form-label ">First Name</label>
-                        </div>
-                        <div class="col-auto">
-                            <input name="firstName"
-                                   th:field="*{firstName}"
-                                   th:errorclass="is-invalid"
-                                   type="text"
-                                   id="inputFirstName"
-                                   class="form-control"
-                                   aria-describedby="firstNameHelpInline">
-                            <small id="firstNameError"
-                                   class="invalid-feedback  form-text bg-danger rounded">Full name length must be more
-                                than
-                                3 characters</small>
-                            <small th:if="${#fields.hasErrors('firstName')}"> Some custom errors</small>
-                        </div>
-                    </div>
-
-                    <div>
-                        <div class="col-auto">
-                            <label for="inputLastName" class="col-form-label ">Last Name</label>
-                        </div>
-                        <div class="col-auto">
-                            <input name="lastName"
-                                   th:field="*{lastName}"
-                                   th:errorclass="is-invalid"
-                                   type="text"
-                                   id="inputLastName"
-                                   class="form-control"
-                                   aria-describedby="lastNameHelpInline">
-                            <small id="lastNameError"
-                                   class="invalid-feedback  form-text bg-danger rounded">Full name length must be more
-                                than
-                                3 characters</small>
-                            <small th:if="${#fields.hasErrors('lastName')}"> Some custom errors</small>
-                        </div>
-                    </div>
-
-                    <div>
-                        <div class="col-auto">
-                            <label for="inputPhoneNumber" class="col-form-label ">Phone Number</label>
-                        </div>
-                        <div class="col-auto">
-                            <input name="phoneNumber"
-                                   th:field="*{phoneNumber}"
-                                   th:errorclass="is-invalid"
-                                   type="text"
-                                   id="inputPhoneNumber"
-                                   class="form-control"
-                                   aria-describedby="phoneNumberHelpInline">
-                            <small id="phoneNumberError"
-                                   class="invalid-feedback  form-text bg-danger rounded">Full name length must be more
-                                than
-                                3 characters</small>
-                            <small th:if="${#fields.hasErrors('phoneNumber')}"> Some custom errors</small>
-                        </div>
-                    </div>
-
-                    <div>
-                        <div class="col-auto">
-
-                            <label for="inputEmail" class="col-form-label ">Email</label>
-                        </div>
-                        <div class="col-auto">
-
-                            <input name="email"
-                                   th:field="*{email}"
-                                   type="email"
-                                   id="inputEmail"
-                                   class="form-control"
-                                   aria-describedby="emailHelpInline">
-                            <small th:if="${#fields.hasErrors('email')}"
-                                   id="emailError"
-                                   class="invalid-feedback  form-text bg-danger rounded">Must be valid email</small>
-                        </div>
-                    </div>
-<!--                    test za nov place email-->
-                    <div class="input-group flex-nowrap col-auto">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="addon-wrapping">@</span>
-                        </div>
-                        <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping">
-                    </div>
-<!--                    end za testa-->
-                    <div>
-                        <div class="col-auto">
-                            <label for="inputPassword" class="col-form-label ">Password</label>
-                        </div>
-                        <div class="col-auto">
-                            <input name="password"
-                                   th:field="*{password}"
-                                   required minlength="5" maxlength="20"
-                                   type="password"
-                                   id="inputPassword"
-                                   class="form-control"
-                                   aria-describedby="passwordHelpInline">
-                            <small id="passwordError"
-                                   class="invalid-feedback  form-text bg-danger rounded">
-                                Password length must be between 5 and 20 characters and passwords should match.
-                            </small>
-                        </div>
-                    </div>
-
-                    <div>
-                        <div class="col-auto">
-                            <label for="inputConfirmPassword" class="col-form-label ">Confirm Password</label>
-                        </div>
-                        <div class="col-auto">
-                            <input name="confirmPassword"
-                                   th:field="*{confirmPassword}"
-                                   required minlength="5" maxlength="20"
-                                   type="password"
-                                   id="inputConfirmPassword"
-                                   class="form-control"
-                                   aria-describedby="confirmPasswordHelpInline">
-                            <small id="confirmPasswordError"
-                                   class="invalid-feedback  form-text bg-danger rounded">
-                                Password length must be between 5 and 20 characters and passwords should match.
-                            </small>
-                        </div>
-                    </div>
-
-                    <div class="d-flex justify-content-center mt-4">
-                        <button class="btn btn-primary btn-block w-50" type="submit">Register</button>
-                    </div>
-
-                </form>
+          <div>
+            <div class="col-auto">
+              <label for="inputUsername" class="col-form-label ">Username</label>
             </div>
-        </div>
-    </main>
+
+            <div class="col-auto">
+              <input name="username"
+                     th:field="*{username}"
+                     th:errorclass="is-invalid"
+                     required
+                     minlength="5" maxlength="20"
+                     type="email"
+                     id="inputUsername"
+                     class="form-control"
+                     aria-describedby="usernameHelpInline"/>
+              <small id="usernameError"
+                     class="invalid-feedback bg-danger rounded">Username length must be more than 3
+                characters</small>
+
+              <!--                        <small id="usernameUniqueError"-->
+              <!--                               class=" bg-danger rounded is-invalid">Username is already occupied</small>-->
+            </div>
+          </div>
+
+<!--          <div>-->
+<!--            <div class="col-auto">-->
+<!--              <label for="inputFirstName" class="col-form-label ">First Name</label>-->
+<!--            </div>-->
+<!--            <div class="col-auto">-->
+<!--              <input name="firstName"-->
+<!--                     th:field="*{firstName}"-->
+<!--                     th:errorclass="is-invalid"-->
+<!--                     type="text"-->
+<!--                     id="inputFirstName"-->
+<!--                     class="form-control"-->
+<!--                     aria-describedby="firstNameHelpInline">-->
+<!--              <small id="firstNameError"-->
+<!--                     class="invalid-feedback  form-text bg-danger rounded">Full name length must be more-->
+<!--                than-->
+<!--                3 characters</small>-->
+<!--              <small th:if="${#fields.hasErrors('firstName')}"> Some custom errors</small>-->
+<!--            </div>-->
+<!--          </div>-->
+
+<!--          <div>-->
+<!--            <div class="col-auto">-->
+<!--              <label for="inputLastName" class="col-form-label ">Last Name</label>-->
+<!--            </div>-->
+<!--            <div class="col-auto">-->
+<!--              <input name="lastName"-->
+<!--                     th:field="*{lastName}"-->
+<!--                     th:errorclass="is-invalid"-->
+<!--                     type="text"-->
+<!--                     id="inputLastName"-->
+<!--                     class="form-control"-->
+<!--                     aria-describedby="lastNameHelpInline">-->
+<!--              <small id="lastNameError"-->
+<!--                     class="invalid-feedback  form-text bg-danger rounded">Full name length must be more-->
+<!--                than-->
+<!--                3 characters</small>-->
+<!--              <small th:if="${#fields.hasErrors('lastName')}"> Some custom errors</small>-->
+<!--            </div>-->
+<!--          </div>-->
+
+<!--          <div>-->
+<!--            <div class="col-auto">-->
+<!--              <label for="inputPhoneNumber" class="col-form-label ">Phone Number</label>-->
+<!--            </div>-->
+<!--            <div class="col-auto">-->
+<!--              <input name="phoneNumber"-->
+<!--                     th:field="*{phoneNumber}"-->
+<!--                     th:errorclass="is-invalid"-->
+<!--                     type="text"-->
+<!--                     id="inputPhoneNumber"-->
+<!--                     class="form-control"-->
+<!--                     aria-describedby="phoneNumberHelpInline">-->
+<!--              <small id="phoneNumberError"-->
+<!--                     class="invalid-feedback  form-text bg-danger rounded">Full name length must be more-->
+<!--                than-->
+<!--                3 characters</small>-->
+<!--              <small th:if="${#fields.hasErrors('phoneNumber')}"> Some custom errors</small>-->
+<!--            </div>-->
+<!--          </div>-->
+
+<!--          <div>-->
+<!--            <div class="col-auto">-->
+
+<!--              <label for="inputEmail" class="col-form-label ">Email</label>-->
+<!--            </div>-->
+<!--            <div class="col-auto">-->
+
+<!--              <input name="email"-->
+<!--                     th:field="*{email}"-->
+<!--                     type="email"-->
+<!--                     id="inputEmail"-->
+<!--                     class="form-control"-->
+<!--                     aria-describedby="emailHelpInline">-->
+<!--              <small th:if="${#fields.hasErrors('email')}"-->
+<!--                     id="emailError"-->
+<!--                     class="invalid-feedback  form-text bg-danger rounded">Must be valid email</small>-->
+<!--            </div>-->
+<!--          </div>-->
+          <!--                    test za nov place email-->
+<!--          <div class="input-group flex-nowrap col-auto">-->
+<!--            <div class="input-group-prepend">-->
+<!--              <span class="input-group-text" id="addon-wrapping">@</span>-->
+<!--            </div>-->
+<!--            <input type="text" class="form-control" placeholder="Username" aria-label="Username"-->
+<!--                   aria-describedby="addon-wrapping">-->
+<!--          </div>-->
+          <!--                    end za testa-->
+          <div>
+            <div class="col-auto">
+              <label for="inputPassword" class="col-form-label ">Password</label>
+            </div>
+            <div class="col-auto">
+              <input name="password"
+                     th:field="*{password}"
+                     required minlength="5" maxlength="20"
+                     type="password"
+                     id="inputPassword"
+                     class="form-control"
+                     aria-describedby="passwordHelpInline">
+              <small id="passwordError"
+                     class="invalid-feedback  form-text bg-danger rounded">
+                Password length must be between 5 and 20 characters and passwords should match.
+              </small>
+            </div>
+          </div>
+
+          <div>
+            <div class="col-auto">
+              <label for="inputConfirmPassword" class="col-form-label ">Confirm Password</label>
+            </div>
+            <div class="col-auto">
+              <input name="confirmPassword"
+                     th:field="*{confirmPassword}"
+                     required minlength="5" maxlength="20"
+                     type="password"
+                     id="inputConfirmPassword"
+                     class="form-control"
+                     aria-describedby="confirmPasswordHelpInline">
+              <small id="confirmPasswordError"
+                     class="invalid-feedback  form-text bg-danger rounded">
+                Password length must be between 5 and 20 characters and passwords should match.
+              </small>
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-center mt-4">
+            <button class="btn btn-primary btn-block w-50" type="submit">Register</button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </main>
 </div>
 </body>
 </html>

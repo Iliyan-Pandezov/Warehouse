@@ -4,6 +4,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -19,14 +20,15 @@ public class User {
     @Type(type = "uuid-char")
     private UUID id;
 
-//    private String name;
+    //    private String name;
 //
     @Column(nullable = false, unique = true)
     private String username;
 
-//    @Column(unique = true)
+    //    @Column(unique = true)
 //    private String email;
 
+    private boolean isActive;
     @Column(nullable = false)
     private String password;
 
@@ -38,6 +40,15 @@ public class User {
     }
 
     public User() {
+        this.roles=new HashSet<>();
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
     }
 
     public UUID getId() {
@@ -48,7 +59,7 @@ public class User {
         this.id = id;
     }
 
-//    public String getName() {
+    //    public String getName() {
 //        return name;
 //    }
 //

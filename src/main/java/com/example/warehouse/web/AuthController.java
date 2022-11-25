@@ -22,7 +22,7 @@ public class AuthController {
         this.authService = authService;
     }
 
-    @ModelAttribute("userRegistrationDTO")
+    @ModelAttribute("userModel")
     public UserRegistrationDTO initRegistrationDTO() {
         return new UserRegistrationDTO();
     }
@@ -33,18 +33,18 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public String register(@Valid UserRegistrationDTO userRegistrationDTO,
+    public String register(@Valid UserRegistrationDTO userModel,
                            BindingResult bindingResult,
                            RedirectAttributes redirectAttributes,
                            HttpServletRequest request) {
         if (bindingResult.hasErrors()) {
-            redirectAttributes.addFlashAttribute("userRegistrationDTO", userRegistrationDTO);
+            redirectAttributes.addFlashAttribute("userModel", userModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userRegistrationDTO", bindingResult);
 
             return "redirect:/users/newRegister";
         }
 
-        this.authService.register(userRegistrationDTO);
+        this.authService.register(userModel);
 
         return "redirect:/users/login";
     }

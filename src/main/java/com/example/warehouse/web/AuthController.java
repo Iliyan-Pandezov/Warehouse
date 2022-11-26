@@ -39,9 +39,9 @@ public class AuthController {
                            HttpServletRequest request) {
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("userModel", userModel);
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userRegistrationDTO", bindingResult);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userModel", bindingResult);
 
-            return "redirect:/users/newRegister";
+            return "redirect:/users/register";
         }
 
         this.authService.register(userModel);

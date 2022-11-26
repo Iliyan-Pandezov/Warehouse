@@ -10,6 +10,7 @@ import javax.persistence.*;
 import java.math.BigDecimal;;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -36,6 +37,9 @@ public class Product {
 
     @CreationTimestamp
     private Date addedOn;
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Set<Category> category;
 
 
     public Product() {

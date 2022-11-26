@@ -1,13 +1,10 @@
 package com.example.warehouse.model.dto;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
 public class UserRegistrationDTO {
-    @NotBlank
-    @Email
+    @NotEmpty(message = "User email has to be provided!")
+    @Email(message = "Has to be a valid email address!")
     @Size(max = 20)
     private String username;
 

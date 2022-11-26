@@ -82,7 +82,7 @@
         </thead>
         <tbody>
         <tr th:each="product : ${products}">
-            <td scope="row">
+            <td scope="row" th:text="${#dates.format(product.addedOn, 'dd-MMM-yyyy HH:mm')}">
                 [[*{product.addedOn}]]
             </td>
             <td>
@@ -124,9 +124,11 @@
                                                 <input type="text" name="newName" class="form-control"
                                                        th:placeholder="*{product.name}">
                                                 <label>New Details</label>
-                                                <input type="text" name="newDetails" class="form-control" th:placeholder="*{product.details}">
+                                                <input type="text" name="newDetails" class="form-control"
+                                                       th:placeholder="*{product.details}">
                                                 <label>New Price</label>
-                                                <input type="text" name="newPrice" class="form-control" th:placeholder="*{product.price}">
+                                                <input type="text" name="newPrice" class="form-control"
+                                                       th:placeholder="*{product.price}">
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">

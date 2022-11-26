@@ -1,11 +1,14 @@
 package com.example.warehouse.model.entity;
 
+import com.sun.xml.bind.v2.TODO;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
+import java.math.BigDecimal;;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
 
@@ -30,8 +33,10 @@ public class Product {
     private BigDecimal price;
 
     private String image;
+
     @CreationTimestamp
     private Date addedOn;
+
 
     public Product() {
     }

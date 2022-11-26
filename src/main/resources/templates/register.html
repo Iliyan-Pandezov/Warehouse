@@ -20,7 +20,7 @@
                 class="registration-form"
                 th:action="@{/users/register}"
                 th:method="post"
-                th:object="${userRegistrationDTO}">
+                th:object="${userModel}">
 
           <div>
             <div class="col-auto">
@@ -33,7 +33,7 @@
                      th:errorclass="is-invalid"
                      required
                      minlength="5" maxlength="20"
-                     type="email"
+                     type="text"
                      id="inputUsername"
                      class="form-control"
                      aria-describedby="usernameHelpInline"/>

@@ -4,6 +4,7 @@ import com.example.warehouse.model.dto.ProductDTO;
 import com.example.warehouse.model.entity.Product;
 import com.example.warehouse.repository.ProductRepository;
 import com.example.warehouse.service.ProductService;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -29,7 +30,7 @@ public class ProductController {
 
     @GetMapping("/products")
     public String listOfProducts(Model model) {
-        List<Product> listProducts = productRepository.findAll();
+        List<Product> listProducts = productRepository.findAll(Sort.by("addedOn"));
         model.addAttribute("products", listProducts);
         return "products";
     }

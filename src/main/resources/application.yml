@@ -15,6 +15,15 @@ spring:
         format_sql: true
         globally_quoted_identifiers=true:defer-datasource-initialization: true
 
-#  sql:
+
+#  mvc: format.date-time=yyyy-MM-dd HH:mm
+
+  jackson:
+   date-format: yyyy-MM-dd　HH:mm
+   serialization:
+    write-dates-as-timestamps: false
+
+
+# sql:
 #    init:
 #      mode: always

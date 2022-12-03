@@ -1,7 +1,6 @@
 package com.example.warehouse.web;
 
 import com.example.warehouse.model.dto.CategoryDTO;
-import com.example.warehouse.model.entity.Category;
 import com.example.warehouse.repository.CategoryRepository;
 import com.example.warehouse.service.CategoryService;
 import org.springframework.stereotype.Controller;
@@ -15,18 +14,15 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.util.List;
 import java.util.UUID;
 
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
     private final CategoryService categoryService;
-    private final CategoryRepository categoryRepository;
 
-    public AdminController(CategoryService categoryService, CategoryRepository categoryRepository) {
+    public AdminController(CategoryService categoryService) {
         this.categoryService = categoryService;
-        this.categoryRepository = categoryRepository;
     }
 
     @PostMapping("/category")
@@ -49,8 +45,7 @@ public class AdminController {
 
     @GetMapping("/category")
     public String listOfCategories(Model model) {
-        List<Category> listCategories = categoryRepository.findAll();
-        model.addAttribute("categories", listCategories);
+        model.addAttribute("categories", categoryService.listAllCategories());
         return "categoryTest";
     }
 

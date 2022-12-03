@@ -1,14 +1,18 @@
 package com.example.warehouse.web;
 
 import com.example.warehouse.model.dto.ProductDTO;
+import com.example.warehouse.model.entity.Category;
 import com.example.warehouse.model.entity.Product;
+import com.example.warehouse.repository.CategoryRepository;
 import com.example.warehouse.repository.ProductRepository;
+import com.example.warehouse.service.CategoryService;
 import com.example.warehouse.service.ProductService;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -22,16 +26,24 @@ import java.util.UUID;
 public class ProductController {
     private final ProductService productService;
     private final ProductRepository productRepository;
+    private final CategoryRepository categoryRepository;
+    private final CategoryService categoryService;
 
-    public ProductController(ProductService productService, ProductRepository productRepository) {
+    public ProductController(ProductService productService, ProductRepository productRepository, CategoryRepository categoryRepository, CategoryService categoryService) {
         this.productService = productService;
         this.productRepository = productRepository;
+        this.categoryRepository = categoryRepository;
+        this.categoryService = categoryService;
     }
 
     @GetMapping("/products")
     public String listOfProducts(Model model) {
         List<Product> listProducts = productRepository.findAll(Sort.by("addedOn"));
         model.addAttribute("products", listProducts);
+//        List<Category> listOfCategories = categoryRepository.findAll(Sort.by(Sort.Direction.ASC, "name"));
+//        model.addAttribute("categories", listOfCategories);
+        //todo fix products and categories html template too
+
         return "products";
     }
 
@@ -53,9 +65,14 @@ public class ProductController {
         return "redirect:/products";
     }
 
-    @PostMapping("/product/update/delete/{id}")
+    @PostMapping("/products/update/delete/{id}")
     public String deleteProduct(@PathVariable("id") UUID id) {
         productService.removeProduct(id);
         return "redirect:/products";
+    }
+
+    @ModelAttribute("categories")
+    public List<Category> getCategories() {
+        return categoryService.listAllCategories();
     }
 }

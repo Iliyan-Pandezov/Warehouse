@@ -47,6 +47,22 @@
                                    aria-describedby="detailsHelpInline">
                         </div>
                     </div>
+
+                    <div>
+                        <div class="col-auto">
+                            <label for="inputCategory" class="col-form-label ">Category</label>
+                        </div>
+                        <div class="col-auto">
+                            <select class="form-control" id="inputCategory" name="category">
+                                <option th:each="category : ${categories}"
+                                        th:text="${category.name}"
+                                        th:value="${category.id}"
+                                        name="category"
+                                        class="form-control"></option>
+                            </select>
+                        </div>
+                    </div>
+
                     <div>
                         <div class="col-auto">
                             <label for="inputPrice" class="col-form-label ">Price</label>
@@ -77,6 +93,7 @@
             <th scope="col">Name</th>
             <th scope="col">Details</th>
             <th scope="col">Price</th>
+            <th scope="col">Category</th>
             <th scope="col">Edit</th>
         </tr>
         </thead>
@@ -93,6 +110,9 @@
             </td>
             <td>
                 [[*{product.price}]]
+            </td>
+            <td>
+                [[*{product.category.getName}]]
             </td>
             <td>
                 <div class="row justify-content-around">
@@ -115,7 +135,7 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <form th:action="@{/product/update/full}" th:method="post">
+                                        <form th:action="@{/products/update/full}" th:method="post">
                                             <div class="form-group">
                                                 <label>Product ID</label>
                                                 <input type="text" th:value="*{product.id}" name="id"
@@ -143,7 +163,7 @@
                         </div>
                     </div>
                     <div>
-                        <form th:action="@{/product/update/delete/{id}(id=${product.id})}" th:method="post">
+                        <form th:action="@{/products/update/delete/{id}(id=${product.id})}" th:method="post">
                             <button type="submit" class="btn btn-outline-danger">Delete</button>
                         </form>
                     </div>

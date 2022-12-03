@@ -1,16 +1,12 @@
 package com.example.warehouse.model.entity;
 
-import com.sun.xml.bind.v2.TODO;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
-import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.math.BigDecimal;;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -38,11 +34,18 @@ public class Product {
     @CreationTimestamp
     private Date addedOn;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private Set<Category> category;
-
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Category category;
 
     public Product() {
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public Date getAddedOn() {

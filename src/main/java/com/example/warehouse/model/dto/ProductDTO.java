@@ -1,7 +1,11 @@
 package com.example.warehouse.model.dto;
 
+import com.example.warehouse.model.entity.Category;
+
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.Set;
 
 public class ProductDTO {
     @NotNull
@@ -11,9 +15,20 @@ public class ProductDTO {
     @NotNull
     private BigDecimal price;
 
+    @NotNull
+    private Category category;
+
     private String image;
 
     public ProductDTO() {
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public String getName() {

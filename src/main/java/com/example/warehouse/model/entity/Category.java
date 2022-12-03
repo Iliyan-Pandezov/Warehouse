@@ -4,6 +4,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -21,8 +22,18 @@ public class Category {
 
     @Column(nullable = false, unique = true)
     private String name;
+    @OneToMany
+    private List<Product> listOfProducts;
 
     public Category() {
+    }
+
+    public List<Product> getListOfProducts() {
+        return listOfProducts;
+    }
+
+    public void setListOfProducts(List<Product> listOfProducts) {
+        this.listOfProducts = listOfProducts;
     }
 
     public UUID getId() {

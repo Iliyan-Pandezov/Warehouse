@@ -32,4 +32,9 @@ public class CategoryService {
     public void removeCategory(UUID id) {
         this.categoryRepository.deleteById(id);
     }
+
+    public List<Category> listAllCategories(){
+        List<Category> allCategories = this.categoryRepository.findAll();
+        return allCategories;
+    }
 }

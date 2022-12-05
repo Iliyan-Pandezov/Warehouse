@@ -34,7 +34,7 @@ public class Product {
     @CreationTimestamp
     private Date addedOn;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Category category;
 
     public Product() {

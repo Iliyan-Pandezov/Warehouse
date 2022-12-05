@@ -64,7 +64,7 @@ public class ProductController {
 
         return "redirect:/products";
     }
-
+//ToDo To fix the delete category with the product
     @PostMapping("/products/update/delete/{id}")
     public String deleteProduct(@PathVariable("id") UUID id) {
         productService.removeProduct(id);

@@ -6,6 +6,7 @@ import com.example.warehouse.model.entity.Role;
 import com.example.warehouse.model.entity.User;
 import com.example.warehouse.repository.RoleRepository;
 import com.example.warehouse.repository.UserRepository;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +24,14 @@ public class AuthService {
         this.passwordEncoder = passwordEncoder;
         this.roleRepository = roleRepository;
         this.userMapper = userMapper;
+    }
+
+    public User getCurrentlyLoggedInCustomer(Authentication authentication) {
+        if (authentication == null) return null;
+
+        String username = authentication.getName();
+
+        return this.userRepository.getUserByUsername(username);
     }
 
     public void register(UserRegistrationDTO userRegistrationDTO) {

@@ -37,13 +37,7 @@ public class ProductController {
     }
 
     @GetMapping("/products")
-    public String listOfProducts(Model model) {
-        List<Product> listProducts = productRepository.findAll(Sort.by("addedOn"));
-        model.addAttribute("products", listProducts);
-//        List<Category> listOfCategories = categoryRepository.findAll(Sort.by(Sort.Direction.ASC, "name"));
-//        model.addAttribute("categories", listOfCategories);
-        //todo fix products and categories html template too
-
+    public String listOfProducts() {
         return "products";
     }
 
@@ -64,7 +58,7 @@ public class ProductController {
 
         return "redirect:/products";
     }
-//ToDo To fix the delete category with the product
+
     @PostMapping("/products/update/delete/{id}")
     public String deleteProduct(@PathVariable("id") UUID id) {
         productService.removeProduct(id);
@@ -74,5 +68,15 @@ public class ProductController {
     @ModelAttribute("categories")
     public List<Category> getCategories() {
         return categoryService.listAllCategories();
+    }
+
+    @ModelAttribute("products")
+    public List<Product> getProducts() {
+        return productRepository.findAll(Sort.by("addedOn"));
+    }
+
+    @GetMapping("/customer/products")
+    public String products() {
+        return "test za produkti";
     }
 }

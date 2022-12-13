@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title>Warehouse</title>
+    <th:block th:include="~{/fragments/head}"/>
+</head>
+<body>
+<th:block th:insert="~{/fragments/nav}"/>
+<div style="wrapper">
+    <h1>Your Shopping Cart:</h1>
+
+    <div class="row m-1">
+
+        <div class="col-sm-8">
+            <th:block th:each="item, status : ${cartItems}">
+                <div class="row border rounded" th:with="product=${item.product}">
+                    <div class="col-1">
+                        <div>[[${status.count}]]</div>
+                        <div><a class="fas fa-trash icon-dark" th:href="@{/}"></a></div>
+                    </div>
+                    <div class="col-3">
+                        <img th:src="@{${product.image}}" class="img-fluid"/>
+                    </div>
+                    <div class="col-6">
+                        <div>
+                            <!--                            TODO Add the URI for the product page!-->
+                            <a> <!--  th:href="@{${product.URI}}" th:title="${product.name}" target="_blank" -->
+                                <b>[[${product.name}]]</b>
+                            </a>
+                        </div>
+
+                        <div th:replace="quantity_control :: quantity_control(${item.quantity}, ${item.product.id})">
+                            Quantity
+                        </div>
+                        <div>
+                            <span>X</span>
+                            <span>[[${product.price}]]</span>
+                        </div>
+                        <div>
+                            <span class="h4">[Subtotal]</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row m-1">&nbsp;</div>
+            </th:block>
+        </div>
+
+        <div class="col-sm-4">
+            <div>
+                <span class="h3">Estimated total:</span>
+            </div>
+            <div class="mt-2">
+                <span class="h2">[Total Amount]</span>
+            </div>
+            <div class="mt-2">
+                <button class="btn btn-danger p-3 mt-2">Check Out</button>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+</body>
+</html>

@@ -28,6 +28,7 @@ public class WarehouseSecurityConfig {
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                 .antMatchers("/").permitAll()
                 .antMatchers("/users/login", "/users/register").anonymous()
+                .antMatchers("/users/cart").authenticated()
                 .antMatchers("/admin/**/**/**/**").hasRole("ADMIN")
                 .and()
                 .formLogin()

@@ -7,7 +7,6 @@ import com.example.warehouse.repository.ProductRepository;
 import com.example.warehouse.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -35,5 +34,4 @@ public class ProductService {
     //    public void updateProduct(Product product, ProductDTO productDTO){
 //
 //    }
-
 }

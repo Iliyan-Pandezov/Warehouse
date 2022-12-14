@@ -7,7 +7,6 @@ import com.example.warehouse.repository.CartRepository;
 import com.example.warehouse.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 import java.util.UUID;
 
@@ -25,27 +24,24 @@ public class CartService {
         return cartRepository.findByUser(user);
     }
 
-    public Integer addProduct(UUID productId, Integer quantity, User user) {
-        Integer addedQuantity = quantity;
+    public void removeAProduct(Integer cartItemId, User user) {
+//        Integer addedQuantity = quantity;
 
-        Product product = productRepository.findById(productId).get();
+//        Product product = productRepository.findById(productId).get();
 
-        Cart cartItem = cartRepository.findByUserAndProduct(user, product);
+        List<Cart> cartItems = cartRepository.findByUser(user);
 
-        if (cartItem != null) {
-            addedQuantity = cartItem.getQuantity() + quantity;
-            cartItem.setQuantity(addedQuantity);
-        } else {
-            cartItem = new Cart();
-            cartItem.setQuantity(quantity);
-            cartItem.setUser(user);
-            cartItem.setProduct(product);
+        for (Cart cartItem : cartItems) {
+            if (cartItem.getId().equals(cartItemId)){
+                cartRepository.deleteById(cartItemId);
+            }
         }
-        cartRepository.save(cartItem);
-        return addedQuantity;
+//
+//        if (cartItem != null) {
+//        }
     }
 
-    public void addAProduct(UUID productId, Integer quantity, User user) {
+    public void addProduct(UUID productId, Integer quantity, User user) {
         Integer quantityToBeAdded = quantity;
 
         Product product = productRepository.findById(productId).get();
@@ -55,14 +51,12 @@ public class CartService {
         if (cartItems != null) {
             quantityToBeAdded = cartItems.getQuantity() + quantity;
             cartItems.setQuantity(quantityToBeAdded);
-            cartRepository.save(cartItems);
         } else {
             cartItems = new Cart();
             cartItems.setQuantity(quantity);
             cartItems.setUser(user);
             cartItems.setProduct(product);
-
-            cartRepository.save(cartItems);
         }
+        cartRepository.save(cartItems);
     }
 }

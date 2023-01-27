@@ -21,7 +21,8 @@
                         class="registration-form"
                         th:action="@{/products}"
                         th:method="post"
-                        th:object="${productDTO}">
+                        th:object="${productDTO}"
+                        enctype="multipart/form-data">
                     <div>
                         <div class="col-auto">
                             <label for="inputName" class="col-form-label ">Name</label>
@@ -75,6 +76,21 @@
                                    aria-describedby="priceHelpInline">
                         </div>
                     </div>
+
+                    <div>
+                        <div class="col-auto">
+                            <label for="inputImage" class="col-form-label ">Image</label>
+                        </div>
+                        <div class="col-auto">
+                            <input type="file"
+                                   name="image"
+                                   accept="image/*"
+                                   class="form-control-file"
+                                   id="inputImage"
+                                   aria-describedby="imageHelpInline">
+                        </div>
+                    </div>
+
                     <div class="d-flex justify-content-center mt-2">
                         <button class="btn btn-primary btn-block w-50" type="submit">Add Product</button>
                     </div>
@@ -98,7 +114,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="product : ${products}">
+        <tr th:each="product : ${products}" th:with="category = ${product.category}">
             <td scope="row" th:text="${#dates.format(product.addedOn, 'dd-MMM-yyyy HH:mm')}">
                 [[*{product.addedOn}]]
             </td>
@@ -112,7 +128,7 @@
                 [[*{product.price}]]
             </td>
             <td>
-                [[*{product.category.getName}]]
+                [[*{category.getName}]]
             </td>
             <td>
                 <div class="row justify-content-around">

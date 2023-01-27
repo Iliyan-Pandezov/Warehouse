@@ -5,13 +5,13 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Date;
 import java.util.UUID;
 
 @Entity
 @Data
-@Table(name = "categories")
-public class Category {
+@Table(name = "images")
+public class Image {
 
     @Id
     @GeneratedValue(generator = "UUID")
@@ -22,6 +22,13 @@ public class Category {
     @Type(type = "uuid-char")
     private UUID id;
 
-    @Column(nullable = false, unique = true)
     private String name;
+
+    @Lob
+    private byte[] file;
+
+    private Date creationDate;
+
+    @ManyToOne
+    private Product product;
 }

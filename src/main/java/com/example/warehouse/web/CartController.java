@@ -6,6 +6,8 @@ import com.example.warehouse.repository.UserRepository;
 import com.example.warehouse.service.AuthService;
 import com.example.warehouse.service.CartService;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,6 +36,8 @@ public class CartController {
 
     @GetMapping("/cart")
     public String listOfProducts(Model model, Authentication authentication) {
+
+        //SecurityContextHolder.getContext().getAuthentication();
 
         User currentUser = authService.getCurrentlyLoggedInCustomer(authentication);
 

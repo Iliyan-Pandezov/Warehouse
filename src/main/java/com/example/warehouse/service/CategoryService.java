@@ -25,7 +25,9 @@ public class CategoryService {
         if (byName.isPresent()) {
             throw new RuntimeException("category.present");
         }
+
         Category newCategory = this.categoryMapper.DTOToCategory(categoryDTO);
+
         this.categoryRepository.save(newCategory);
     }
 
@@ -33,7 +35,7 @@ public class CategoryService {
         this.categoryRepository.deleteById(id);
     }
 
-    public List<Category> listAllCategories(){
+    public List<Category> listAllCategories() {
         List<Category> allCategories = this.categoryRepository.findAll();
         return allCategories;
     }

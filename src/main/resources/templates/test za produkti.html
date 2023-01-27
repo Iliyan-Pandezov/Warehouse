@@ -12,14 +12,14 @@
 
 
 <div>
-    <div class="card mt-2" style="width: 18rem;" th:each="product : ${products}">
-        <img th:src="@{${product.image}}" class="card-img-top" }>
+    <div class="card mt-2" style="width: 18rem;" th:each="product : ${products}" th:with="image = ${image.product}">
+<!--        <img th:src="*{'data:image/*;base64, '+{image.file}}" class="card-img-top" }>-->
         <div class="card-body">
             <h5 class="card-title">[[*{product.name}]]</h5>
             <p class="card-text">[[*{product.details}]]</p>
             <div th:replace="quantity_control :: quantity_control(1, ${product.id})">Quantity</div>
 
-<!--            TODO add the quantity to the url line-->
+            <!--            TODO add the quantity to the url line-->
             <form th:method="post" th:action="@{'/users/cart/add/1/'+${product.id}}">
                 <button type="submit" class="btn btn-primary" id="buttonAdd2Cart">Add to Cart</button>
             </form>

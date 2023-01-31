@@ -60,7 +60,7 @@ public class CartController {
     }
 
     @PostMapping("/cart/add/{quantity}/{id}")
-    public String addProductToCart(@PathVariable("id") UUID productId,
+    public String addProductToCart(@PathVariable("id") Long productId,
                                    @PathVariable("quantity") Integer quantity,
                                    Authentication authentication) {
         User currentUser = authService.getCurrentlyLoggedInCustomer(authentication);

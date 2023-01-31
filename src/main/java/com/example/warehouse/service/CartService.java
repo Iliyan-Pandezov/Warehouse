@@ -41,7 +41,7 @@ public class CartService {
 //        }
     }
 
-    public void addProduct(UUID productId, Integer quantity, User user) {
+    public void addProduct(Long productId, Integer quantity, User user) {
         Integer quantityToBeAdded = quantity;
 
         Product product = productRepository.findById(productId).get();

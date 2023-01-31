@@ -42,7 +42,7 @@ public class ProductService {
         this.productRepository.save(product);
     }
 
-    public void removeProduct(UUID id) {
+    public void removeProduct(Long id) {
         this.productRepository.deleteById(id);
     }
 

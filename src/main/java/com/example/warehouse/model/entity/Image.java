@@ -1,6 +1,7 @@
 package com.example.warehouse.model.entity;
 
 import lombok.Data;
+import lombok.ToString;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
@@ -10,6 +11,7 @@ import java.util.UUID;
 
 @Entity
 @Data
+@ToString
 @Table(name = "images")
 public class Image {
 
@@ -24,11 +26,12 @@ public class Image {
 
     private String name;
 
-    @Lob
-    private byte[] file;
+//    @Lob
+//    private byte[] file;
 
+    private String url;
     private Date creationDate;
 
-    @ManyToOne
-    private Product product;
+//    @ManyToOne
+//    private Product product;
 }

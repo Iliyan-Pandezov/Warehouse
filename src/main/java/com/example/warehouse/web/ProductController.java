@@ -55,8 +55,8 @@ public class ProductController {
 //            return "redirect:/products";
 //        }
 
-        this.productService.addProduct(productDTO);
-        this.imageService.addImage(multipartFile, productDTO);
+        this.imageService.addImage(multipartFile);
+        this.productService.addProduct(productDTO, multipartFile);
 
         return "redirect:/products";
     }

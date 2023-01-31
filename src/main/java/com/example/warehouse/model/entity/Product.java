@@ -1,6 +1,7 @@
 package com.example.warehouse.model.entity;
 
 import lombok.Data;
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
@@ -8,6 +9,7 @@ import org.hibernate.annotations.Type;
 import javax.persistence.*;
 import java.math.BigDecimal;;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -31,11 +33,11 @@ public class Product {
 
     private BigDecimal price;
 
-    //    @OneToMany
+//    @OneToMany
 //    private List<Image> imageList;
 
-//    @OneToOne
-//    private Image image;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Image image;
 
     @CreationTimestamp
     private Date addedOn;

@@ -12,8 +12,10 @@
 
 
 <div>
-    <div class="card mt-2" style="width: 18rem;" th:each="product : ${products}" th:with="image = ${image.product}">
-<!--        <img th:src="*{'data:image/*;base64, '+{image.file}}" class="card-img-top" }>-->
+    <div class="card mt-2" style="width: 18rem;" th:each="product : ${products}"
+         th:with="image = ${product.image}"
+    >
+        <img th:src="@{${'/images/ProductImages/' + image.name}}" class="card-img-top" }>
         <div class="card-body">
             <h5 class="card-title">[[*{product.name}]]</h5>
             <p class="card-text">[[*{product.details}]]</p>

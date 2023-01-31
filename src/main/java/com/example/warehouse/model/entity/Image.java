@@ -2,12 +2,9 @@ package com.example.warehouse.model.entity;
 
 import lombok.Data;
 import lombok.ToString;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.UUID;
 
 @Entity
 @Data
@@ -16,13 +13,8 @@ import java.util.UUID;
 public class Image {
 
     @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(
-            name = "UUID",
-            strategy = "org.hibernate.id.UUIDGenerator"
-    )
-    @Type(type = "uuid-char")
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String name;
 

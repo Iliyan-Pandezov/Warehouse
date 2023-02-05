@@ -1,12 +1,12 @@
 package com.example.warehouse.model.entity;
 
 import lombok.Data;
-import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.math.BigDecimal;;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Data
@@ -32,8 +32,8 @@ public class Product {
 //    @OneToMany
 //    private List<Image> imageList;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private Image image;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Image> imageList;
 
     @CreationTimestamp
     private Date addedOn;

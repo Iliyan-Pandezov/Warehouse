@@ -2,6 +2,7 @@ package com.example.warehouse.web;
 
 import com.example.warehouse.model.dto.ProductDTO;
 import com.example.warehouse.model.entity.Category;
+import com.example.warehouse.model.entity.Image;
 import com.example.warehouse.model.entity.Product;
 import com.example.warehouse.repository.CategoryRepository;
 import com.example.warehouse.repository.ProductRepository;
@@ -10,6 +11,7 @@ import com.example.warehouse.service.ImageService;
 import com.example.warehouse.service.ProductService;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,7 +21,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.util.List;
-import java.util.UUID;
 
 @Controller
 public class ProductController {
@@ -46,7 +47,7 @@ public class ProductController {
     public String addProduct(@Valid ProductDTO productDTO,
                              BindingResult bindingResult,
                              RedirectAttributes redirectAttributes,
-                             HttpServletRequest request, @RequestParam("image")MultipartFile multipartFile) throws IOException {
+                             HttpServletRequest request, @RequestParam("image") MultipartFile[] multipartFile) throws IOException {
 
 //        if (bindingResult.hasErrors()) {
 //            redirectAttributes.addFlashAttribute("productDTO", productDTO);
@@ -54,8 +55,12 @@ public class ProductController {
 //
 //            return "redirect:/products";
 //        }
+//        List<Image> imageList;
+//        for (MultipartFile file : multipartFile) {
+//            String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+//        }
 
-        this.imageService.addImage(multipartFile);
+//        this.imageService.addImage(multipartFile);
         this.productService.addProduct(productDTO, multipartFile);
 
         return "redirect:/products";

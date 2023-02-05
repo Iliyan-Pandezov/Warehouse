@@ -12,7 +12,7 @@ import java.util.UUID;
 public interface CategoryRepository extends JpaRepository<Category, UUID> {
 
     @Transactional
-    void deleteById(UUID id);
+    void deleteById(Long id);
 
     Optional<Category> findByName(String name);
 }

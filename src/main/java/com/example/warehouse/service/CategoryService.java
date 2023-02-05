@@ -31,7 +31,7 @@ public class CategoryService {
         this.categoryRepository.save(newCategory);
     }
 
-    public void removeCategory(UUID id) {
+    public void removeCategory(Long id) {
         this.categoryRepository.deleteById(id);
     }
 

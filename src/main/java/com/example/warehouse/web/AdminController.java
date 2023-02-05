@@ -1,7 +1,6 @@
 package com.example.warehouse.web;
 
 import com.example.warehouse.model.dto.CategoryDTO;
-import com.example.warehouse.repository.CategoryRepository;
 import com.example.warehouse.service.CategoryService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -50,7 +49,7 @@ public class AdminController {
     }
 
     @PostMapping("/category/update/delete/{id}")
-    public String deleteCategory(@PathVariable("id") UUID id) {
+    public String deleteCategory(@PathVariable("id") Long id) {
         categoryService.removeCategory(id);
         return "redirect:/admin/category";
     }

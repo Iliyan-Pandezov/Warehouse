@@ -1,8 +1,8 @@
 package com.example.warehouse.web;
 
+import com.example.warehouse.mapper.ProductDTOMapper;
 import com.example.warehouse.model.dto.ProductDTO;
 import com.example.warehouse.model.entity.Category;
-import com.example.warehouse.model.entity.Image;
 import com.example.warehouse.model.entity.Product;
 import com.example.warehouse.repository.CategoryRepository;
 import com.example.warehouse.repository.ProductRepository;
@@ -11,7 +11,7 @@ import com.example.warehouse.service.ImageService;
 import com.example.warehouse.service.ProductService;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.StringUtils;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class ProductController {
@@ -29,13 +30,15 @@ public class ProductController {
     private final CategoryRepository categoryRepository;
     private final CategoryService categoryService;
     private final ImageService imageService;
+    private final ProductDTOMapper productDTOMapper;
 
-    public ProductController(ProductService productService, ProductRepository productRepository, CategoryRepository categoryRepository, CategoryService categoryService, ImageService imageService) {
+    public ProductController(ProductService productService, ProductRepository productRepository, CategoryRepository categoryRepository, CategoryService categoryService, ImageService imageService, ProductDTOMapper productDTOMapper) {
         this.productService = productService;
         this.productRepository = productRepository;
         this.categoryRepository = categoryRepository;
         this.categoryService = categoryService;
         this.imageService = imageService;
+        this.productDTOMapper = productDTOMapper;
     }
 
     @GetMapping("/products")
@@ -55,12 +58,7 @@ public class ProductController {
 //
 //            return "redirect:/products";
 //        }
-//        List<Image> imageList;
-//        for (MultipartFile file : multipartFile) {
-//            String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-//        }
 
-//        this.imageService.addImage(multipartFile);
         this.productService.addProduct(productDTO, multipartFile);
 
         return "redirect:/products";
@@ -85,5 +83,19 @@ public class ProductController {
     @GetMapping("/customer/products")
     public String products() {
         return "test za produkti";
+    }
+
+    @GetMapping("/products/{id}")
+    public String singleProduct (Model model, @PathVariable("id") Long id){
+
+        Optional<Product> optionalProduct = this.productRepository.findById(id);
+
+        if (optionalProduct.isPresent()){
+            ProductDTO currentProduct =productDTOMapper.apply((optionalProduct).get());
+            model.addAttribute(currentProduct);
+        }
+
+
+        return "product";
     }
 }

@@ -15,11 +15,7 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    @GenericGenerator(
-//            name = "UUID",
-//            strategy = "org.hibernate.id.UUIDGenerator"
-//    )
-//    @Type(type = "uuid-char")
+
     private Long id;
 
     private String name;
@@ -28,9 +24,6 @@ public class Product {
     private String details;
 
     private BigDecimal price;
-
-//    @OneToMany
-//    private List<Image> imageList;
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<Image> imageList;

@@ -8,6 +8,6 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public interface ImageRepository  extends JpaRepository<Image, UUID> {
+public interface ImageRepository  extends JpaRepository<Image, Long> {
     Optional<Image> findByName(String fileName);
 }

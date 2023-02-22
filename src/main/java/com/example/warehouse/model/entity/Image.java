@@ -18,12 +18,7 @@ public class Image {
 
     private String name;
 
-//    @Lob
-//    private byte[] file;
-
     private String url;
     private Date creationDate;
 
-//    @ManyToOne
-//    private Product product;
 }

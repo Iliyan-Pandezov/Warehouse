@@ -1,5 +1,6 @@
 $(document).ready(function(){
     $("#buttonAdd2Cart").on("click", function(e){
+//        alert('add to cart');
         addToCart();
     });
 });
@@ -7,13 +8,14 @@ $(document).ready(function(){
 function addToCart() {
     quantity = $("#quantity" + productId).val();
 
-    url = contextPath + "/cart/add/" +productId + "/" +quantity;
+    url = contextPath + "users/cart/add/" +productId + "/" +quantity;
 
     $.ajax({
         type: "POST",
-        url: url,
+        url: url
+        ,
         beforeSend: function(xhr) {
-            xhr.setRequestedHeader(crsfHeaderName, csrfValue);
+            xhr.setRequestHeader(crsfHeaderName, csrfValue);
         }
     }).done(function(response){
         $("#modalTitle").text("Shopping Cart");

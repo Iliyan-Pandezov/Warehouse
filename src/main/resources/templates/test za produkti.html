@@ -13,28 +13,30 @@
 
 <div>
     <div class="card mt-2" style="width: 18rem;" th:each="product : ${products}">
-        <!--         th:with="image = ${product.image}"-->
 
         <img th:src="@{'/images/ProductImages/' + ${product.imageList[0].name}}" class="card-img-top" }>
-        <!--        <img th:src="@{${image.url}}" class="card-img-top" }>-->
+
         <div class="card-body">
             <h5 class="card-title">[[*{product.name}]]</h5>
-            <p class="card-text">[[*{product.details}]]</p>
-            <div th:replace="quantity_control :: quantity_control(1, ${product.id})">Quantity</div>
-
             <!--            TODO add the quantity to the url line-->
-            <form th:method="post" th:action="@{'/users/cart/add/1/'+${product.id}}">
-                <button type="submit" class="btn btn-primary" id="buttonAdd2Cart">Add to Cart</button>
+            <p class="card-text">[[*{product.details}]]</p>
+            <form th:method="post" th:action="@{'/users/cart/add/' +${product.id} + '/' + ${qtyValue} }">
             </form>
+
+            <div th:replace="quantity_control :: quantity_control(1, ${product.id})">Quantity</div>
+            <button type="submit" class="btn btn-primary" id="buttonAdd2Cart">Add to Cart</button>
+
+
             <div th:replace="fragments :: standard_modal">Standard Modal Dialog</div>
+
         </div>
     </div>
 </div>
 
-<!--<script type="text/javascript">-->
-<!--        contextPath = "[[@{/}]]";-->
-<!--        var crsfHeaderName = "[[${_csrf.headerName}]]";-->
-<!--        var csrfValue = "[[${_csrf.token}]]";-->
+<script type="text/javascript">
+        contextPath = "[[@{/}]]";
+        var crsfHeaderName = "[[${_csrf.headerName}]]";
+        var csrfValue = "[[${_csrf.token}]]";
 
 <!--        $(document).ready(function(){-->
 <!--            $(".img-thumbnail").mouseover(function(){-->
@@ -48,7 +50,7 @@
 <!--                $("#carouselExampleControls").carousel(parseInt(imageIndex));-->
 <!--            });-->
 <!--        });-->
-<!--    </script>-->
+    </script>
 
 </body>
 </html>

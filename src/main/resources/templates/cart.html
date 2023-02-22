@@ -31,7 +31,7 @@
                     <div class="col-6">
                         <div>
                             <!--                            TODO Add the URI for the product page!-->
-                            <a> <!--  th:href="@{${product.URI}}" th:title="${product.name}" target="_blank" -->
+                            <a th:href="@{/products/{id}(id=${product.id})}" th:title="${product.name}" target="_self" >
                                 <b>[[${product.name}]]</b>
                             </a>
                         </div>

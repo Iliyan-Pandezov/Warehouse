@@ -2,6 +2,7 @@ package com.example.warehouse.model.entity;
 
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "carts")
@@ -53,5 +54,10 @@ public class Cart {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    @Transient
+    public BigDecimal getSubtotal(){
+        return this.product.getPrice().multiply(BigDecimal.valueOf(quantity));
     }
 }

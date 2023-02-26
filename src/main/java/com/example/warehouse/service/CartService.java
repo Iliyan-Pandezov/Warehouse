@@ -7,10 +7,12 @@ import com.example.warehouse.repository.CartRepository;
 import com.example.warehouse.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+import java.math.BigDecimal;
 import java.util.List;
-import java.util.UUID;
 
 @Service
+@Transactional
 public class CartService {
     private final CartRepository cartRepository;
     private final ProductRepository productRepository;
@@ -24,33 +26,30 @@ public class CartService {
         return cartRepository.findByUser(user);
     }
 
-    public void removeAProduct(Integer cartItemId, User user) {
-//        Integer addedQuantity = quantity;
-
-//        Product product = productRepository.findById(productId).get();
-
-        List<Cart> cartItems = cartRepository.findByUser(user);
-
-        for (Cart cartItem : cartItems) {
-            if (cartItem.getId().equals(cartItemId)){
-                cartRepository.deleteById(cartItemId);
-            }
-        }
+//    public Integer removeAProduct(Integer cartItemId, User user) {
 //
-//        if (cartItem != null) {
+//        int productsRemoved = 0;
+//        List<Cart> cartItems = cartRepository.findByUser(user);
+//
+//        for (Cart cartItem : cartItems) {
+//            if (cartItem.getId().equals(cartItemId)){
+//                cartRepository.deleteById(cartItemId);
+//                productsRemoved+=1;
+//            }
 //        }
-    }
+//        return productsRemoved;
+//    }
 
-    public void addProduct(Long productId, Integer quantity, User user) {
-        Integer quantityToBeAdded = quantity;
+    public Integer addProduct(Long productId, Integer quantity, User user) {
+        Integer addedQuantity = quantity;
 
         Product product = productRepository.findById(productId).get();
 
         Cart cartItems = cartRepository.findByUserAndProduct(user, product);
 
         if (cartItems != null) {
-            quantityToBeAdded = cartItems.getQuantity() + quantity;
-            cartItems.setQuantity(quantityToBeAdded);
+            addedQuantity = cartItems.getQuantity() + quantity;
+            cartItems.setQuantity(addedQuantity);
         } else {
             cartItems = new Cart();
             cartItems.setQuantity(quantity);
@@ -58,5 +57,22 @@ public class CartService {
             cartItems.setProduct(product);
         }
         cartRepository.save(cartItems);
+
+        return addedQuantity;
+    }
+
+    public BigDecimal updateQuantity(Integer quantity, Long productId, Long userId) {
+
+        cartRepository.updateQuantity(quantity, productId, userId);
+
+        Product currentProduct = productRepository.findById(productId).get();
+
+        BigDecimal subtotal = currentProduct.getPrice().multiply(BigDecimal.valueOf(quantity));
+
+        return subtotal;
+    }
+
+    public void removeProduct(Long productId, Long userId) {
+        cartRepository.deleteByProductAndCustomer(productId, userId);
     }
 }

@@ -12,31 +12,31 @@
     <h1 class="border-bottom mb-5">[[*{productDTO.name}]]</h1>
     <div class="row container-fluid">
         <div class="col-4">
-<!--            <div id="carouselExampleIndicators" class="carousel slide">-->
-<!--                <div class="carousel-indicators">-->
-<!--                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>-->
-<!--                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>-->
-<!--                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>-->
-<!--                </div>-->
-<!--                <div class="carousel-inner">-->
-<!--                    <div class="carousel-item active">-->
-<!--                        <img th:src="@{'/images/ProductImages/' + ${productDTO.images[0].name}}" class="d-block w-100" alt="...">-->
-<!--                    </div>-->
+            <!--            <div id="carouselExampleIndicators" class="carousel slide">-->
+            <!--                <div class="carousel-indicators">-->
+            <!--                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>-->
+            <!--                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>-->
+            <!--                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>-->
+            <!--                </div>-->
+            <!--                <div class="carousel-inner">-->
+            <!--                    <div class="carousel-item active">-->
+            <!--                        <img th:src="@{'/images/ProductImages/' + ${productDTO.images[0].name}}" class="d-block w-100" alt="...">-->
+            <!--                    </div>-->
 
-<!--                    <div class="carousel-item" th:each="image : ${productDTO.images}">-->
-<!--                        <img th:src="@{'/images/ProductImages/' + ${image.name}}" class="d-block w-100" alt="...">-->
-<!--                    </div>-->
+            <!--                    <div class="carousel-item" th:each="image : ${productDTO.images}">-->
+            <!--                        <img th:src="@{'/images/ProductImages/' + ${image.name}}" class="d-block w-100" alt="...">-->
+            <!--                    </div>-->
 
-<!--                </div>-->
-<!--                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">-->
-<!--                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>-->
-<!--                    <span class="visually-hidden">Previous</span>-->
-<!--                </button>-->
-<!--                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">-->
-<!--                    <span class="carousel-control-next-icon" aria-hidden="true"></span>-->
-<!--                    <span class="visually-hidden">Next</span>-->
-<!--                </button>-->
-<!--            </div>-->
+            <!--                </div>-->
+            <!--                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">-->
+            <!--                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>-->
+            <!--                    <span class="visually-hidden">Previous</span>-->
+            <!--                </button>-->
+            <!--                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">-->
+            <!--                    <span class="carousel-control-next-icon" aria-hidden="true"></span>-->
+            <!--                    <span class="visually-hidden">Next</span>-->
+            <!--                </button>-->
+            <!--            </div>-->
             <img th:src="@{'/images/ProductImages/' + ${productDTO.images[0].name}}" class="img-thumbnail" }>
         </div>
 
@@ -44,6 +44,34 @@
             [[*{productDTO.details}]]
         </div>
 
+        <div th:replace="quantity_control :: quantity_control(1, ${productDTO.id})">Quantity</div>
+        <button type="submit" class="btn btn-primary" id="buttonAdd2Cart">Add to Cart</button>
+
+
+        <div th:replace="fragments :: standard_modal">Standard Modal Dialog</div>
+
+        <script type="text/javascript">
+
+        contextPath = "[[@{/}]]";
+        var crsfHeaderName = "[[${_csrf.headerName}]]";
+        var csrfValue = "[[${_csrf.token}]]";
+        var productId = "[[${productDTO.id}]]";
+
+
+<!--        $(document).ready(function(){-->
+<!--            $(".img-thumbnail").mouseover(function(){-->
+<!--                $("#bigImage").attr("src", $(this).attr("src"));-->
+<!--                $("#bigImage").attr("index", $(this).attr("index"));-->
+<!--            });-->
+
+<!--            $("#bigImage").on("click", function() {-->
+<!--                $("#carouselModal").modal("show");-->
+<!--                imageIndex = $("#bigImage").attr("index");-->
+<!--                $("#carouselExampleControls").carousel(parseInt(imageIndex));-->
+<!--            });-->
+<!--        });-->
+
+        </script>
 
 
     </div>
@@ -51,5 +79,10 @@
         [[*{productDTO.price}]]
     </div>
 </div>
+
+
+<script th:src="@{/js/add_to_cart.js}"></script>
+<script th:src="@{/js/quantity_control.js}"></script>
+
 </body>
 </html>

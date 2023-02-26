@@ -18,13 +18,10 @@
 
         <div class="card-body">
             <h5 class="card-title">[[*{product.name}]]</h5>
-            <!--            TODO add the quantity to the url line-->
-            <p class="card-text">[[*{product.details}]]</p>
-            <form th:method="post" th:action="@{'/users/cart/add/' +${product.id} + '/' + ${qtyValue} }">
-            </form>
 
-            <div th:replace="quantity_control :: quantity_control(1, ${product.id})">Quantity</div>
-            <button type="submit" class="btn btn-primary" id="buttonAdd2Cart">Add to Cart</button>
+            <p class="card-text">[[*{product.details}]]</p>
+
+            <a th:href="@{/products/{id}(id=${product.id})}" class="btn btn-primary">View Product</a>
 
 
             <div th:replace="fragments :: standard_modal">Standard Modal Dialog</div>
@@ -33,24 +30,6 @@
     </div>
 </div>
 
-<script type="text/javascript">
-        contextPath = "[[@{/}]]";
-        var crsfHeaderName = "[[${_csrf.headerName}]]";
-        var csrfValue = "[[${_csrf.token}]]";
-
-<!--        $(document).ready(function(){-->
-<!--            $(".img-thumbnail").mouseover(function(){-->
-<!--                $("#bigImage").attr("src", $(this).attr("src"));-->
-<!--                $("#bigImage").attr("index", $(this).attr("index"));-->
-<!--            });-->
-
-<!--            $("#bigImage").on("click", function() {-->
-<!--                $("#carouselModal").modal("show");-->
-<!--                imageIndex = $("#bigImage").attr("index");-->
-<!--                $("#carouselExampleControls").carousel(parseInt(imageIndex));-->
-<!--            });-->
-<!--        });-->
-    </script>
 
 </body>
 </html>

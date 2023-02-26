@@ -14,15 +14,16 @@
 
         <div class="col-sm-8">
             <th:block th:each="item, status : ${cartItems}">
-                <div class="row border rounded" th:with="product=${item.product}">
+                <div class="row border rounded" th:with="product=${item.product}"
+                th:id="'row' + ${status.count}">
                     <div class="col-1">
                         <div>[[${status.count}]]</div>
                         <div>
-                            <form
-                               th:action="@{/users/cart/delete/{id} (id = ${item.id})}"
-                               th:method="post">
-                                <button type="submit" class="btn btn-outline-danger"> <iconify-icon icon="ion:trash-outline"></iconify-icon></button>
-                            </form>
+                            <a class="fas fa-trash icon-dark link-remove"
+                               th:rowNumber="${status.count}"
+                               th:href="@{'/users/cart/remove/' + ${product.id}}">
+                                <iconify-icon icon="ion:trash-outline"></iconify-icon>
+                            </a>
                         </div>
                     </div>
                     <div class="col-3">
@@ -30,8 +31,7 @@
                     </div>
                     <div class="col-6">
                         <div>
-                            <!--                            TODO Add the URI for the product page!-->
-                            <a th:href="@{/products/{id}(id=${product.id})}" th:title="${product.name}" target="_self" >
+                            <a th:href="@{/products/{id}(id=${product.id})}" th:title="${product.name}" target="_self">
                                 <b>[[${product.name}]]</b>
                             </a>
                         </div>
@@ -44,7 +44,9 @@
                             <span>[[${product.price}]]</span>
                         </div>
                         <div>
-                            <span class="h4">[Subtotal]</span>
+                            <span>=&nbsp;</span>
+                            <span class="h4 productSubtotal"
+                                  th:id="'subtotal' + ${product.id}">[[${item.subtotal}]]</span>
                         </div>
                     </div>
                 </div>
@@ -57,7 +59,7 @@
                 <span class="h3">Estimated total:</span>
             </div>
             <div class="mt-2">
-                <span class="h2">[Total Amount]</span>
+                <span class="h2" id="totalAmount">[Total Amount]</span>
             </div>
             <div class="mt-2">
                 <button class="btn btn-danger p-3 mt-2">Check Out</button>
@@ -67,5 +69,24 @@
     </div>
 
 </div>
+
+<div th:replace="fragments :: standard_modal">Standard Modal Dialog</div>
+
+<script type="text/javascript">
+
+        contextPath = "[[@{/}]]";
+        var crsfHeaderName = "[[${_csrf.headerName}]]";
+        var csrfValue = "[[${_csrf.token}]]";
+
+
+
+
+
+
+
+</script>
+
+<script th:src="@{/js/shopping_cart.js}"></script>
+
 </body>
 </html>

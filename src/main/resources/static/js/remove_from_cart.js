@@ -1,13 +1,12 @@
 $(document).ready(function(){
-    $("#buttonAdd2Cart").on("click", function(e){
-        addToCart();
+    $("#removeFromCart").on("click", function(e){
+        removeFromCart();
     });
 });
 
-function addToCart() {
-    quantity = $("#quantity" + productId).val();
+function removeFromCart() {
 
-    url = contextPath + "users/cart/add/" + productId + "/" +quantity;
+    url = contextPath + "users/cart/delete/" + productId;
 
     $.ajax({
         type: "POST",
@@ -21,7 +20,7 @@ function addToCart() {
         $("#myModal").modal();
     }).fail(function() {
         $("#modalTitle").text("Shopping Cart");
-        $("#modalBody").text("Error while adding product to shopping cart.");
+        $("#modalBody").text("Error while removing a product from shopping cart.");
         $("#myModal").modal();
     });
 }

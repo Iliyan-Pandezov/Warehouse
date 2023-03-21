@@ -32,7 +32,6 @@ public class CartController {
     @GetMapping("/cart")
     public String listOfProducts(Model model, Authentication authentication) {
 
-        //SecurityContextHolder.getContext().getAuthentication();
 
         User currentUser = authService.getCurrentlyLoggedInCustomer(authentication);
 

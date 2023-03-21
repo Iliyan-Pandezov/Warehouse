@@ -7,7 +7,9 @@
 </head>
 <body>
 <div class="wrapper">
-    <header th:replace="fragments/nav"></header>
+
+    <th:block th:include="~{/fragments/header}"/>
+
     <main class="p-5 align-content-center bg-blur my-register-div">
 
 
@@ -19,7 +21,7 @@
 
                 <form
                         class="registration-form"
-                        th:action="@{/products}"
+                        th:action="@{/admin/products}"
                         th:method="post"
                         th:object="${productDTO}"
                         enctype="multipart/form-data">

@@ -26,20 +26,6 @@ public class CartService {
         return cartRepository.findByUser(user);
     }
 
-//    public Integer removeAProduct(Integer cartItemId, User user) {
-//
-//        int productsRemoved = 0;
-//        List<Cart> cartItems = cartRepository.findByUser(user);
-//
-//        for (Cart cartItem : cartItems) {
-//            if (cartItem.getId().equals(cartItemId)){
-//                cartRepository.deleteById(cartItemId);
-//                productsRemoved+=1;
-//            }
-//        }
-//        return productsRemoved;
-//    }
-
     public Integer addProduct(Long productId, Integer quantity, User user) {
         Integer addedQuantity = quantity;
 

@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 
-    <title>Warehouse</title>
+    <title>Product Not Found</title>
     <th:block th:include="~{/fragments/head}"/>
 </head>
 <body>
@@ -11,10 +11,13 @@
 
 <div style="wrapper">
     <main class="p-5 align-content-center bg-blur my-register-div">
-        <h1 class="border-bottom mb-5">Text</h1>
+        <h1 class="border-bottom mb-5">No such product</h1>
     </main>
 </div>
 
+
+<script th:src="@{/js/add_to_cart.js}"></script>
+<script th:src="@{/js/quantity_control.js}"></script>
 
 </body>
 </html>

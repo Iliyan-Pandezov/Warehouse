@@ -1,4 +1,5 @@
 <header>
-    <th:block sec:authorize="isAnonymous()" th:include="~{/fragments/guest-nav}" />
-    <th:block sec:authorize="isAuthenticated()" th:include="~{/fragments/logged-nav}" />
+    <th:block sec:authorize="hasRole('ADMIN')" th:insert="~{/fragments/admin_nav}"/>
+    <th:block sec:authorize="hasRole('CUSTOMER')" th:insert="~{/fragments/nav}"/>
+    <th:block sec:authorize="isAnonymous()" th:insert="~{/fragments/nav}"/>
 </header>

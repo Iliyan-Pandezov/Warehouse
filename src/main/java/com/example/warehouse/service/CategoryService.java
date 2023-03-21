@@ -1,9 +1,7 @@
 package com.example.warehouse.service;
 
-import com.example.warehouse.mapper.CategoryMapper;
 import com.example.warehouse.model.dto.CategoryDTO;
 import com.example.warehouse.model.entity.Category;
-import com.example.warehouse.model.entity.Product;
 import com.example.warehouse.repository.CategoryRepository;
 import org.springframework.stereotype.Service;
 
@@ -13,11 +11,10 @@ import java.util.Optional;
 @Service
 public class CategoryService {
     private final CategoryRepository categoryRepository;
-    private final CategoryMapper categoryMapper;
 
-    public CategoryService(CategoryRepository categoryRepository, CategoryMapper categoryMapper) {
+
+    public CategoryService(CategoryRepository categoryRepository) {
         this.categoryRepository = categoryRepository;
-        this.categoryMapper = categoryMapper;
     }
 
     public void addCategory(CategoryDTO categoryDTO) {

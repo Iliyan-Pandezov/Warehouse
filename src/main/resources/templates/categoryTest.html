@@ -4,10 +4,13 @@
     <meta charset="UTF-8">
     <title>Category</title>
     <th:block th:include="~{/fragments/head}"/>
+
 </head>
 <body>
 <div class="wrapper">
-    <header th:replace="fragments/nav"></header>
+
+    <th:block th:include="~{/fragments/header}"/>
+
     <main class="p-5 align-content-center bg-blur my-register-div">
         <h1 class="border-bottom mb-5">Categories</h1>
     </main>
@@ -53,52 +56,52 @@
             </td>
             <td>
                 <div class="row justify-content-around">
-<!--                    <div>-->
-<!--                        &lt;!&ndash; Button trigger modal &ndash;&gt;-->
-<!--                        <button type="button" class="btn btn-outline-warning" data-toggle="modal"-->
-<!--                                th:attr="data-target='#EditWhole'+*{category.id}">-->
-<!--                            Edit-->
-<!--                        </button>-->
+                    <!--                    <div>-->
+                    <!--                        &lt;!&ndash; Button trigger modal &ndash;&gt;-->
+                    <!--                        <button type="button" class="btn btn-outline-warning" data-toggle="modal"-->
+                    <!--                                th:attr="data-target='#EditWhole'+*{category.id}">-->
+                    <!--                            Edit-->
+                    <!--                        </button>-->
 
-<!--                        &lt;!&ndash; Modal &ndash;&gt;-->
-<!--                        <div class="modal fade" th:id="*{'EditWhole'+{category.id}}" tabindex="-1" role="dialog"-->
-<!--                             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">-->
-<!--                            <div class="modal-dialog modal-dialog-centered" role="document">-->
-<!--                                <div class="modal-content">-->
-<!--                                    <div class="modal-header">-->
-<!--                                        <h5 class="modal-title" id="EditTheWholeCategory">Edit Name</h5>-->
-<!--                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
-<!--                                            <span aria-hidden="true">&times;</span>-->
-<!--                                        </button>-->
-<!--                                    </div>-->
-<!--                                    <div class="modal-body">-->
-<!--                                        <form th:action="@{/product/update/full}" th:method="post">-->
-<!--                                            <div class="form-group">-->
-<!--                                                <label>Product ID</label>-->
-<!--                                                <input type="text" th:value="*{category.id}" name="id"-->
-<!--                                                       class="form-control" readonly="readonly">-->
-<!--                                                <label>New Name</label>-->
-<!--                                                <input type="text" name="newName" class="form-control"-->
-<!--                                                       th:placeholder="*{category.name}">-->
-<!--                                                <label>New Details</label>-->
-<!--                                                <input type="text" name="newDetails" class="form-control"-->
-<!--                                                       th:placeholder="*{product.details}">-->
-<!--                                                <label>New Price</label>-->
-<!--                                                <input type="text" name="newPrice" class="form-control"-->
-<!--                                                       th:placeholder="*{product.price}">-->
-<!--                                            </div>-->
-<!--                                            <div class="modal-footer">-->
-<!--                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">-->
-<!--                                                    Cancel-->
-<!--                                                </button>-->
-<!--                                                <button type="submit" class="btn btn-danger">Save changes</button>-->
-<!--                                            </div>-->
-<!--                                        </form>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
+                    <!--                        &lt;!&ndash; Modal &ndash;&gt;-->
+                    <!--                        <div class="modal fade" th:id="*{'EditWhole'+{category.id}}" tabindex="-1" role="dialog"-->
+                    <!--                             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">-->
+                    <!--                            <div class="modal-dialog modal-dialog-centered" role="document">-->
+                    <!--                                <div class="modal-content">-->
+                    <!--                                    <div class="modal-header">-->
+                    <!--                                        <h5 class="modal-title" id="EditTheWholeCategory">Edit Name</h5>-->
+                    <!--                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+                    <!--                                            <span aria-hidden="true">&times;</span>-->
+                    <!--                                        </button>-->
+                    <!--                                    </div>-->
+                    <!--                                    <div class="modal-body">-->
+                    <!--                                        <form th:action="@{/product/update/full}" th:method="post">-->
+                    <!--                                            <div class="form-group">-->
+                    <!--                                                <label>Product ID</label>-->
+                    <!--                                                <input type="text" th:value="*{category.id}" name="id"-->
+                    <!--                                                       class="form-control" readonly="readonly">-->
+                    <!--                                                <label>New Name</label>-->
+                    <!--                                                <input type="text" name="newName" class="form-control"-->
+                    <!--                                                       th:placeholder="*{category.name}">-->
+                    <!--                                                <label>New Details</label>-->
+                    <!--                                                <input type="text" name="newDetails" class="form-control"-->
+                    <!--                                                       th:placeholder="*{product.details}">-->
+                    <!--                                                <label>New Price</label>-->
+                    <!--                                                <input type="text" name="newPrice" class="form-control"-->
+                    <!--                                                       th:placeholder="*{product.price}">-->
+                    <!--                                            </div>-->
+                    <!--                                            <div class="modal-footer">-->
+                    <!--                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">-->
+                    <!--                                                    Cancel-->
+                    <!--                                                </button>-->
+                    <!--                                                <button type="submit" class="btn btn-danger">Save changes</button>-->
+                    <!--                                            </div>-->
+                    <!--                                        </form>-->
+                    <!--                                    </div>-->
+                    <!--                                </div>-->
+                    <!--                            </div>-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
                     <div>
                         <form th:action="@{/admin/category/update/delete/{id}(id=${category.id})}" th:method="post">
                             <button type="submit" class="btn btn-outline-danger">Delete</button>

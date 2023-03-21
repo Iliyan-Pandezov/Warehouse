@@ -6,7 +6,9 @@
     <th:block th:include="~{/fragments/head}"/>
 </head>
 <body>
-<th:block th:insert="~{/fragments/nav}"/>
+
+<th:block th:include="~{/fragments/header}"/>
+
 <div style="wrapper">
     <h1>Your Shopping Cart:</h1>
 
@@ -73,17 +75,9 @@
 <div th:replace="fragments :: standard_modal">Standard Modal Dialog</div>
 
 <script type="text/javascript">
-
         contextPath = "[[@{/}]]";
         var crsfHeaderName = "[[${_csrf.headerName}]]";
         var csrfValue = "[[${_csrf.token}]]";
-
-
-
-
-
-
-
 </script>
 
 <script th:src="@{/js/shopping_cart.js}"></script>

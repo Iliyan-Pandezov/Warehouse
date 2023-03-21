@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title>Users</title>
+    <th:block th:include="~{/fragments/head}"/>
+</head>
+<body>
+
+<th:block th:include="~{/fragments/header}"/>
+
+<div style="wrapper">
+
+    <main class="p-5 align-content-center bg-blur my-register-div">
+        <h1 class="border-bottom mb-5">Users</h1>
+    </main>
+    <div class="container">
+
+        <table class="table table-striped">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">Username</th>
+                <th scope="col">Role</th>
+                <th scope="col">Is Active</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user : ${users}" th:with="roles = ${user.roles}">
+                <td scope="row">
+                    [[*{user.username}]]
+                </td>
+                <td>
+                    [[*{user.roles}]]
+                </td>
+                <td>
+                    [[*{user.isActive}]]
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+
+</body>
+</html>

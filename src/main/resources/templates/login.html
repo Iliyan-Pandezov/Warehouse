@@ -2,23 +2,45 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
 
-    <title>Online Shop</title>
+    <title>Login</title>
     <th:block th:include="~{/fragments/head}"/>
 </head>
 <body>
 <div class="wrapper">
-    <header th:replace="fragments/nav"></header>
+    <th:block th:include="~{/fragments/header}"/>
+
     <main class="p-5 align-content-center bg-blur my-register-div">
 
 
-        <h1 class="    border-bottom mb-5">Login</h1>
+        <h1 class="border-bottom mb-5">Login</h1>
 
         <div class="d-flex justify-content-center">
 
             <div class="row g-3 align-items-center">
+                <div th:if="${param.error}">
+
+
+                    <div class="alert alert-danger" role="alert">
+                        <p>[[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]</p>
+                    </div>
+
+                    <script type="text/javascript">
+
+                        $(document).ready(function () {
+
+                        window.setTimeout(function() {
+                        $(".alert").fadeTo(2000, 500).slideUp(1000, function(){
+                        $(this).remove();
+                        });
+                        }, 5000);
+                        });
+
+                    </script>
+                </div>
 
                 <form
                         th:action="@{/users/login}"
+                        th:object="${loginForm}"
                         method="post">
                     <div>
                         <div class="col-auto">
@@ -26,11 +48,21 @@
                         </div>
                         <div class="col-auto">
                             <input type="text"
-                                   name="username"
-                                   required minlength="4" maxlength="20"
+                                   th:field="username"
+                                   th:errorclass="is-invalid"
+                                   required
+                                   minlength="4" maxlength="30"
                                    id="inputUsername"
                                    class="form-control"
-                                   aria-describedby="usernameHelpInline">
+                                   aria-describedby="usernameHelpInline"
+                                   is-invalid
+                                   is-valid
+                            >
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+
+
                         </div>
                     </div>
                     <div>
@@ -53,12 +85,6 @@
         </div>
     </main>
 </div>
-<footer class="footer bg-blur rounded">
-    <div class="container-fluid text-center">
-        <div class="h5 text-white">
-            &copy; Lucho, Chocho & Spring Advanced Students 2021. All rights reserved.
-        </div>
-    </div>
-</footer>
+
 </body>
 </html>

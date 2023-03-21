@@ -36,11 +36,11 @@ public class AuthService {
 
     public void register(UserRegistrationDTO userRegistrationDTO) {
         if (!userRegistrationDTO.getPassword().equals(userRegistrationDTO.getConfirmPassword())) {
-            throw new RuntimeException("password.match");
+            throw new RuntimeException("Passwords does not match!");
         }
         Optional<User> byUsername = this.userRepository.findByUsername(userRegistrationDTO.getUsername());
         if (byUsername.isPresent()) {
-            throw new RuntimeException("username.used");
+            throw new RuntimeException("Email already exists!");
         }
 
         User newUser = userMapper.DTOToUser(userRegistrationDTO);

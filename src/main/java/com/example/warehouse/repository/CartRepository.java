@@ -19,9 +19,6 @@ public interface CartRepository extends JpaRepository<Cart, Integer> {
 
     Cart findByUserAndProduct(User user, Product product);
 
-    @Transactional
-    void deleteById(Integer id);
-
     @Query(value = "UPDATE Carts c SET c.quantity = ?1 WHERE c.product_id = ?2 AND c.customer_id = ?3", nativeQuery = true)
     @Modifying
     void updateQuantity(Integer quantity, Long productId, Long userId);

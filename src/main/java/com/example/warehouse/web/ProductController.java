@@ -41,34 +41,7 @@ public class ProductController {
         this.productDTOMapper = productDTOMapper;
     }
 
-    @GetMapping("/products")
-    public String listOfProducts() {
-        return "products";
-    }
 
-    @PostMapping("/products")
-    public String addProduct(@Valid ProductDTO productDTO,
-                             BindingResult bindingResult,
-                             RedirectAttributes redirectAttributes,
-                             HttpServletRequest request, @RequestParam("image") MultipartFile[] multipartFile) throws IOException {
-
-//        if (bindingResult.hasErrors()) {
-//            redirectAttributes.addFlashAttribute("productDTO", productDTO);
-//            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.productDTO", bindingResult);
-//
-//            return "redirect:/products";
-//        }
-
-        this.productService.addProduct(productDTO, multipartFile);
-
-        return "redirect:/products";
-    }
-
-    @PostMapping("/products/update/delete/{id}")
-    public String deleteProduct(@PathVariable("id") Long id) {
-        productService.removeProduct(id);
-        return "redirect:/products";
-    }
 
     @ModelAttribute("categories")
     public List<Category> getCategories() {
@@ -80,7 +53,7 @@ public class ProductController {
         return productRepository.findAll(Sort.by("addedOn"));
     }
 
-    @GetMapping("/customer/products")
+    @GetMapping("/products")
     public String products() {
         return "test za produkti";
     }
@@ -93,6 +66,8 @@ public class ProductController {
         if (optionalProduct.isPresent()){
             ProductDTO currentProduct =productDTOMapper.apply((optionalProduct).get());
             model.addAttribute(currentProduct);
+        } else {
+            return "productNotFound";
         }
 
 

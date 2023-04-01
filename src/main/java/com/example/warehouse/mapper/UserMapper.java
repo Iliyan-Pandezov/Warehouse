@@ -7,7 +7,7 @@ import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface UserMapper {
-    @Mapping(target = "active", constant = "true")
+    @Mapping(target = "enabled", constant = "true")
     User DTOToUser(UserRegistrationDTO userRegistrationDTO);
 
     UserRegistrationDTO UserToDTO (User user);

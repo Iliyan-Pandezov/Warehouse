@@ -1,5 +1,5 @@
 <header>
-    <th:block sec:authorize="hasRole('ADMIN')" th:insert="~{/fragments/admin_nav}"/>
-    <th:block sec:authorize="hasRole('CUSTOMER')" th:insert="~{/fragments/nav}"/>
+    <th:block sec:authorize="hasAuthority('ADMIN')" th:insert="~{/fragments/admin_nav}"/>
+    <th:block sec:authorize="hasAuthority('CUSTOMER')" th:insert="~{/fragments/nav}"/>
     <th:block sec:authorize="isAnonymous()" th:insert="~{/fragments/nav}"/>
 </header>

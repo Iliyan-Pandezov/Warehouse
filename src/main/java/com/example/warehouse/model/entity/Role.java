@@ -21,22 +21,10 @@ public class Role {
     @Column(unique = true)
     private UserRoleEnum name;
 
-    //    public Role() {
-//    }
-//
     public Role(UserRoleEnum name) {
         this.name = name;
     }
 
-    //
-//    public Long getId() {
-//        return id;
-//    }
-//
-//    public void setId(Long id) {
-//        this.id = id;
-//    }
-//
     public UserRoleEnum getName() {
         return name;
     }

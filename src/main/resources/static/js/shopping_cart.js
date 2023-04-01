@@ -37,11 +37,11 @@ function removeFromCart(link){
                 });
             }
             $("#modalBody").text(response);
-            $("#myModal").modal();
+            $("#myModal").modal('show');
         }).fail(function() {
             $("#modalTitle").text("Shopping Cart");
             $("#modalBody").text("Error while removing a product from shopping cart.");
-            $("#myModal").modal();
+            $("#myModal").modal('show');
         });
 }
 
@@ -90,7 +90,7 @@ url = contextPath + "users/cart/update/" + productId + "/" +quantity;
     }).fail(function() {
         $("#modalTitle").text("Shopping Cart");
         $("#modalBody").text("Error while adding product to shopping cart.");
-        $("#myModal").modal();
+        $("#myModal").modal('show');
     });
 
 }

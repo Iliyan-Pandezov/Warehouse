@@ -10,7 +10,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class AuthService {
@@ -43,11 +45,13 @@ public class AuthService {
             throw new RuntimeException("Email already exists!");
         }
 
-        User newUser = userMapper.DTOToUser(userRegistrationDTO);
+        Set<Role> customRole = new HashSet<>();
+        customRole.add(roleRepository.getRoleById(3L));
+        User newUser = new User();
+        newUser.setUsername(userRegistrationDTO.getUsername());
+        newUser.setEnabled(true);
+        newUser.setRoles(customRole);
         newUser.setPassword(passwordEncoder.encode(userRegistrationDTO.getPassword()));
-
-        Role customRole = roleRepository.getRoleById(3L);
-        newUser.addRole(customRole);
 
         this.userRepository.save(newUser);
     }

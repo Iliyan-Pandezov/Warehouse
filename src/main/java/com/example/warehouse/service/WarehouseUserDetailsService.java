@@ -1,8 +1,9 @@
 package com.example.warehouse.service;
 
+import com.example.warehouse.model.entity.User;
+import com.example.warehouse.model.entity.WarehouseUserDetails;
 import com.example.warehouse.repository.UserRepository;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -18,13 +19,13 @@ public class WarehouseUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepository.findByUsername(username)
-                .map(u -> new User(
-                        u.getUsername(),
-                        u.getPassword(),
-                        u.getRoles().stream()
-                                .map(role -> new SimpleGrantedAuthority("ROLE_" + role.getName().name()))
-                                .collect(Collectors.toList())
-                )).orElseThrow(() -> new UsernameNotFoundException(username + " was not found!"));
+
+        User user = userRepository.getUserByUsername(username);
+
+        if (user == null) {
+            throw new UsernameNotFoundException("Could not find user" + username);
+        }
+
+        return new WarehouseUserDetails(user);
     }
 }

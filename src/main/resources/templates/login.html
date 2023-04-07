@@ -35,6 +35,9 @@
                         }, 5000);
                         });
 
+
+
+
                     </script>
                 </div>
 
@@ -43,39 +46,34 @@
                         th:object="${loginForm}"
                         method="post">
                     <div>
-                        <div class="col-auto">
-                            <label for="inputUsername" class="col-form-label ">Username</label>
-                        </div>
-                        <div class="col-auto">
-                            <input type="text"
+
+                        <div class="form-floating mb-3">
+                            <input type="email"
                                    name="username"
                                    errorclass="is-invalid"
-                                   required
                                    minlength="4" maxlength="30"
-                                   id="inputUsername"
-                                   class="form-control"
                                    aria-describedby="usernameHelpInline"
-                                   is-invalid
-                                   is-valid
-                            >
-                            <div class="valid-feedback">
-                                Looks good!
-                            </div>
+                                   class="form-control"
+                                   id="inputUsername"
+                                   placeholder="name@example.com">
 
+                            <label for="inputUsername">Username</label>
 
                         </div>
+
                     </div>
+
                     <div>
-                        <div class="col-auto">
-                            <label for="inputPassword" class="col-form-label ">Password</label>
-                        </div>
-                        <div class="col-auto">
+
+                        <div class="form-floating mb-3">
                             <input type="password"
                                    name="password"
-                                   required minlength="4" maxlength="20"
-                                   id="inputPassword" class="form-control"
-                                   aria-describedby="passwordHelpInline">
+                                   class="form-control"
+                                   id="inputPassword"
+                                   placeholder="Password">
+                            <label class="text-dark" for="inputPassword">Password</label>
                         </div>
+
                     </div>
                     <div class="d-flex justify-content-center mt-2">
                         <button class="btn btn-primary btn-block w-50" type="submit">Login</button>

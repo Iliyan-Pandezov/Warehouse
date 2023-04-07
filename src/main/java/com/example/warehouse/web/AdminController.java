@@ -64,7 +64,8 @@ public class AdminController {
         model.addAttribute("categories", categoryService.listAllCategories());
         return "categoryTest";
 
-    }@GetMapping("/users")
+    }
+    @GetMapping("/users")
     public String listOfUsers() {
 
         return "users";

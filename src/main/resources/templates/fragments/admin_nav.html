@@ -24,14 +24,14 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" sec:authorize="hasRole('ADMIN')" href="/admin/products">Products</a>
+                    <a class="nav-link" sec:authorize="hasAuthority('ADMIN')" href="/admin/products">Products</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" sec:authorize="hasRole('ADMIN')" href="/admin/category">Category</a>
+                    <a class="nav-link" sec:authorize="hasAuthority('ADMIN')" href="/admin/category">Category</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" sec:authorize="hasRole('ADMIN')" href="/admin/users">Users</a>
+                    <a class="nav-link" sec:authorize="hasAuthority('ADMIN')" href="/admin/users">Users</a>
                 </li>
             </ul>
             <ul class="navbar-nav mr-auto">

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title>Warehouse</title>
+    <th:block th:include="~{/fragments/head}"/>
+</head>
+<body>
+
+<th:block th:include="~{/fragments/header}"/>
+
+<div style="wrapper">
+    <main class="p-5 align-content-center bg-blur my-register-div">
+        <h1 class="border-bottom mb-5">Create/Edit Profile</h1>
+    </main>
+</div>
+
+<div class="d-flex justify-content-center ">
+    <div class="row g-3">
+
+        <form
+
+                th:action="@{/users/profile/create}"
+                th:method="post"
+                th:object="${profileDTO}">
+
+            <div>
+                <div class="col-auto">
+                    <label for="inputFirstName" class="col-form-label ">First Name</label>
+                </div>
+                <div class="col-auto">
+                    <input name="firstName"
+                           th:field="*{firstName}"
+                           th:errorclass="is-invalid"
+
+
+                           type="text"
+                           id="inputFirstName"
+                           class="form-control"
+                           aria-describedby="firstNameHelpInline"/>
+
+                    <small class="bg-danger rounded text-white padding-2" th:if="${#fields.hasErrors('firstName')}"
+                           th:errorclass="is-invalid" th:errors="*{firstName}"/>
+
+                </div>
+            </div>
+
+            <div>
+                <div class="col-auto">
+                    <label for="inputLastName" class="col-form-label ">Last Name</label>
+                </div>
+                <div class="col-auto">
+                    <input name="firstName"
+                           th:field="*{lastName}"
+                           th:errorclass="is-invalid"
+
+
+                           type="text"
+                           id="inputLastName"
+                           class="form-control"
+                           aria-describedby="firstNameHelpInline"/>
+
+                    <small class="bg-danger rounded text-white padding-2" th:if="${#fields.hasErrors('lastName')}"
+                           th:errorclass="is-invalid" th:errors="*{lastName}"/>
+
+                </div>
+            </div>
+
+            <div>
+                <div class="col-auto">
+                    <label for="inputPhoneNumber" class="col-form-label ">Phone Number</label>
+                </div>
+                <div class="col-auto">
+                    <input name="phoneNumber"
+                           th:field="*{phoneNumber}"
+                           th:errorclass="is-invalid"
+
+
+                           type="text"
+                           id="inputPhoneNumber"
+                           class="form-control"
+                           aria-describedby="phoneNumberHelpInline"/>
+
+                    <small class="bg-danger rounded text-white padding-2" th:if="${#fields.hasErrors('phoneNumber')}"
+                           th:errorclass="is-invalid" th:errors="*{phoneNumber}"/>
+
+                </div>
+            </div>
+
+
+
+            <div class="d-flex justify-content-center mt-4">
+                <button class="btn btn-primary btn-block w-50" type="submit" id="registerButton">Create Profile
+                </button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

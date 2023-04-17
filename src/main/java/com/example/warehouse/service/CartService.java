@@ -61,4 +61,8 @@ public class CartService {
     public void removeProduct(Long productId, Long userId) {
         cartRepository.deleteByProductAndCustomer(productId, userId);
     }
+
+    public void clearCart(User user){
+        cartRepository.clearCartByUser(user.getId());
+    }
 }

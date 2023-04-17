@@ -8,7 +8,6 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 
@@ -26,4 +25,8 @@ public interface CartRepository extends JpaRepository<Cart, Integer> {
     @Query(value = "DELETE FROM Carts c WHERE c.product_id = ?1 AND c.customer_id = ?2", nativeQuery = true)
     @Modifying
     void deleteByProductAndCustomer(Long productId, Long userId);
+
+    @Query(value = "DELETE FROM Carts c WHERE c.customer_id = ?1", nativeQuery = true)
+    @Modifying
+    void clearCartByUser(Long userId);
 }

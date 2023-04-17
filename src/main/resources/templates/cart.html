@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
 
     <title>Warehouse</title>
@@ -17,7 +17,7 @@
         <div class="col-sm-8">
             <th:block th:each="item, status : ${cartItems}">
                 <div class="row border rounded" th:with="product=${item.product}"
-                th:id="'row' + ${status.count}">
+                     th:id="'row' + ${status.count}">
                     <div class="col-1">
                         <div>[[${status.count}]]</div>
                         <div>
@@ -64,12 +64,68 @@
                 <span class="h2" id="totalAmount">[Total Amount]</span>
             </div>
             <div class="mt-2">
-                <button class="btn btn-danger p-3 mt-2">Check Out</button>
+                <button class="btn btn-danger p-3 mt-2" data-bs-toggle="modal" data-bs-target="#orderModal">Check Out
+                </button>
             </div>
         </div>
 
     </div>
 
+</div>
+
+<div class="modal fade text-center" id="orderModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+
+            <div class="modal-header">
+                <h4 class="modal-title" id="modalTitle">Select Address</h4>
+                <button type="button" class="btn-close" aria-label="Close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form th:action="@{/users/orders/submit}"
+                      th:method="POST"
+                id="myForm">
+
+                    <div class="form-check" th:each="address : ${addresses}">
+                        <input type="radio" th:name="address" th:id="'address-'+${address.id}" th:value=${address.id}>
+
+                        <label class="form-check-label" th:for="'address-'+${address.id}">
+                            [[${address.name}]]
+                            [[${address.id}]]
+                        </label>
+
+
+                    </div>
+
+                    <button type="Submit" class="btn btn-success" onclick="submitForm()">Submit</button>
+
+                </form>
+                <script>
+function submitForm() {
+  const form = document.getElementById("myForm");
+  const selectedRadio = form.querySelector('input[name="address"]:checked');
+  if (selectedRadio) {
+    const selectedValue = selectedRadio.value;
+    const action = form.action + '?a=' + selectedValue;
+    form.action = action;
+    form.submit();
+  }
+}
+</script>
+            </div>
+            <div class="modal-footer">
+                <!--TODO check if cart is empty before submitting order-->
+
+
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+
+
+            </div>
+
+
+        </div>
+    </div>
 </div>
 
 <div th:replace="fragments :: standard_modal">Standard Modal Dialog</div>
@@ -78,6 +134,23 @@
         contextPath = "[[@{/}]]";
         var crsfHeaderName = "[[${_csrf.headerName}]]";
         var csrfValue = "[[${_csrf.token}]]";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </script>
 
 <script th:src="@{/js/shopping_cart.js}"></script>

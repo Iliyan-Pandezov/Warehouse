@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title>Warehouse</title>
+    <th:block th:include="~{/fragments/head}"/>
+</head>
+<body>
+
+<th:block th:include="~{/fragments/header}"/>
+
+<div style="wrapper">
+    <main class="p-5 align-content-center bg-blur my-register-div">
+        <h1 class="border-bottom mb-5">Your order from
+            <span th:text="${#dates.format(order.submittedOn, 'dd-MMM-yyyy')}">[[*{order.submittedOn}]]</span>
+        </h1>
+    </main>
+</div>
+
+<!--TODO to populate the view order-->
+
+
+</body>
+</html>

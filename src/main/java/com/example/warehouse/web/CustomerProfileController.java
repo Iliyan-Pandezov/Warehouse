@@ -69,7 +69,7 @@ public class CustomerProfileController {
         ProfileDAO currentProfile = profileDAOMapper.apply(profile);
         List<AddressDAO> addressList = addressService.addressDAOList(profile);
         model.addAttribute(currentProfile);
-        model.addAttribute("addresses",addressList);
+        model.addAttribute("addresses", addressList);
 
         return "profile";
 

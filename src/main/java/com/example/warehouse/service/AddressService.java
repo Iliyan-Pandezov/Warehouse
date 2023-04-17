@@ -10,7 +10,6 @@ import com.example.warehouse.repository.AddressRepository;
 import com.example.warehouse.repository.ProfileRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -51,7 +50,7 @@ public class AddressService {
         List<Address> customerAddresses = addressRepository.findByProfile(profile.getId());
 
         return customerAddresses.stream()
-                .map(a-> new AddressDAO(
+                .map(a -> new AddressDAO(
                         a.getId(),
                         a.getProfile(),
                         a.getName(),
@@ -66,26 +65,5 @@ public class AddressService {
                 ))
                 .collect(Collectors.toList());
 
-
-
-//        List<AddressDAO> list = new ArrayList<>();
-
-//        for (Address address : customerAddresses) {
-//            AddressDAO addressDAO = new AddressDAO(
-//                    address.getId(),
-//                    address.getProfile(),
-//                    address.getName(),
-//                    address.getTown(),
-//                    address.getNeighbourhood(),
-//                    address.getStreetName(),
-//                    address.getStreetNumber(),
-//                    address.getBuildingNumber(),
-//                    address.getEntrance(),
-//                    address.getFloor(),
-//                    address.getApartment());
-//            list.add(addressDAO);
-//        }
-
-//        return list;
     }
 }

@@ -1,6 +1,7 @@
 package com.example.warehouse.service;
 
 import com.example.warehouse.model.entity.Image;
+import com.example.warehouse.model.entity.Product;
 import com.example.warehouse.repository.ImageRepository;
 import com.example.warehouse.repository.ProductRepository;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class ImageService {
@@ -52,4 +54,10 @@ public class ImageService {
     }
 
     //TODO to find a way to delete images from local directory automatically with the product
+
+    public List<Image> imageList(Product product){
+
+        return product.getImageList();
+//        return imageRepository.findAllByProductId(product.getId());
+    }
 }

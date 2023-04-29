@@ -11,11 +11,13 @@
 
 <div style="wrapper">
     <main class="p-5 align-content-center bg-blur my-register-div">
-        <h1 class="border-bottom mb-5">Your order from
-            <span th:text="${#dates.format(order.submittedOn, 'dd-MMM-yyyy')}">[[*{order.submittedOn}]]</span>
-        </h1>
+        <h1 class="border-bottom mb-5">Order</h1>
     </main>
 </div>
+
+<h2>
+    [[*{order.user.getProfile().getFullName()}]]
+</h2>
 
 <table class="table table-striped table-hover">
     <thead class="thead-dark" data-bs-theme="dark">
@@ -28,7 +30,7 @@
     </thead>
 
     <tbody class="table-group-divider">
-    <tr th:each="item : ${ordersItems}">
+    <tr th:each="item : ${items}">
         <td>
             [[*{item.name}]]
         </td>
@@ -49,46 +51,51 @@
 <h1>
     Shipping Address:
 </h1>
-<h3>
-
+<h5>
 
     <table class="table table-borderless">
         <tbody>
         <tr>
             <th scope="row">Town:</th>
-            <td>[[*{address.town}]]</td>
+            <td>[[${order.address.town}]]</td>
         </tr>
         <tr>
             <th scope="row">Neighbourhood:</th>
-            <td>[[*{address.neighbourhood}]]</td>
+            <td>[[*{order.address.getNeighbourhood()}]]</td>
         </tr>
-        <tr th:if="${address.streetName != ''}">
+        <tr th:if="${order.address.streetName != ''}">
             <th scope="row">Street Name:</th>
-            <td>[[*{address.streetName}]]</td>
+            <td>[[*{order.address.getStreetName()}]]</td>
         </tr>
-        <tr th:if="${address.streetNumber != ''}">
+        <tr th:if="${order.address.streetNumber != ''}">
             <th scope="row">Street Number:</th>
-            <td>[[*{address.streetNumber}]]</td>
+            <td>[[*{order.address.getStreetNumber()}]]</td>
         </tr>
-        <tr th:if="${address.buildingNumber != ''}">
+        <tr th:if="${order.address.buildingNumber != ''}">
             <th scope="row">Building Number:</th>
-            <td>[[*{address.buildingNumber}]]</td>
+            <td>[[*{order.address.getBuildingNumber()}]]</td>
         </tr>
-        <tr th:if="${address.entrance != ''}">
+        <tr th:if="${order.address.entrance != ''}">
             <th scope="row">Entrance:</th>
-            <td>[[*{address.entrance}]]</td>
+            <td>[[*{order.address.getEntrance()}]]</td>
         </tr>
-        <tr th:if="${address.floor != ''}">
+        <tr th:if="${order.address.floor != ''}">
             <th scope="row">Floor:</th>
-            <td>[[*{address.floor}]]</td>
+            <td>[[*{order.address.getFloor()}]]</td>
         </tr>
-        <tr th:if="${address.apartment != ''}">
+        <tr th:if="${order.address.apartment != ''}">
             <th scope="row">Apartment:</th>
-            <td>[[*{address.apartment}]]</td>
+            <td>[[*{order.address.getApartment()}]]</td>
         </tr>
         </tbody>
     </table>
 
-</h3>
+</h5>
+
+<form th:action="@{/admin/orders/confirm/{id}(id=${order.id})}"
+      th:method="post">
+    <button type="submit" class="btn btn-success">Confirm Order</button>
+</form>
+
 </body>
 </html>

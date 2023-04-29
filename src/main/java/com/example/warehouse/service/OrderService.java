@@ -7,6 +7,7 @@ import com.example.warehouse.model.entity.Cart;
 import com.example.warehouse.model.entity.order.Order;
 import com.example.warehouse.model.entity.User;
 import com.example.warehouse.model.entity.order.OrderItem;
+import com.example.warehouse.model.entity.order.ShippingAddress;
 import com.example.warehouse.repository.AddressRepository;
 import com.example.warehouse.repository.CartRepository;
 import com.example.warehouse.repository.OrderRepository;
@@ -43,19 +44,28 @@ public class OrderService {
 
     public void createOrder(User user, String addressId, List<Cart> cartItems) {
 
-        Address shippingAddress = new Address();
+        ShippingAddress shippingAddress = new ShippingAddress();
 
-        Optional<Address> selectedAddress = addressRepository.findById(Long.parseLong(addressId));
-
-        if (selectedAddress.isPresent()) {
-            shippingAddress = selectedAddress.get();
-        }
+        Optional<Address> address = addressRepository.findById(Long.parseLong(addressId));
 
         List<OrderItem> orderItems = new ArrayList<>();
 
         BigDecimal total = new BigDecimal(0);
 
         Order order = new Order();
+
+        if (address.isPresent()) {
+            Address currentAddress = address.get();
+            shippingAddress.setTown(currentAddress.getTown());
+            shippingAddress.setNeighbourhood(currentAddress.getNeighbourhood());
+            shippingAddress.setStreetName(currentAddress.getStreetName());
+            shippingAddress.setStreetNumber(currentAddress.getStreetNumber());
+            shippingAddress.setBuildingNumber(currentAddress.getBuildingNumber());
+            shippingAddress.setEntrance(currentAddress.getEntrance());
+            shippingAddress.setFloor(currentAddress.getFloor());
+            shippingAddress.setApartment(currentAddress.getApartment());
+            shippingAddress.setOrder(order);
+        }
 
         for (Cart cartItem : cartItems) {
             OrderItem currentItem = new OrderItem();

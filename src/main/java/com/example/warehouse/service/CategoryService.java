@@ -34,8 +34,7 @@ public class CategoryService {
     }
 
     public List<Category> listAllCategories() {
-        List<Category> allCategories = this.categoryRepository.findAll();
-        return allCategories;
+        return this.categoryRepository.findAll();
     }
 
 }

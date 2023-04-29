@@ -21,7 +21,13 @@ public class Profile {
     private String phoneNumber;
 
     @OneToOne
-    @JoinColumn(name = "customer_id")
+    @JoinColumn(name = "customer_id", referencedColumnName = "id")
     private User user;
 
+    @OneToMany(mappedBy = "profile", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Address> addresses;
+
+    public String getFullName(){
+        return this.firstName + " " + this.lastName;
+    }
 }

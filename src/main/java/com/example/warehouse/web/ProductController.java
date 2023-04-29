@@ -3,6 +3,7 @@ package com.example.warehouse.web;
 import com.example.warehouse.mapper.ProductDTOMapper;
 import com.example.warehouse.model.dto.ProductDTO;
 import com.example.warehouse.model.entity.Category;
+import com.example.warehouse.model.entity.Image;
 import com.example.warehouse.model.entity.Product;
 import com.example.warehouse.repository.CategoryRepository;
 import com.example.warehouse.repository.ProductRepository;
@@ -64,8 +65,11 @@ public class ProductController {
         Optional<Product> optionalProduct = this.productRepository.findById(id);
 
         if (optionalProduct.isPresent()){
+
             ProductDTO currentProduct =productDTOMapper.apply((optionalProduct).get());
+            List<Image> imageList = imageService.imageList(optionalProduct.get());
             model.addAttribute(currentProduct);
+            model.addAttribute(imageList);
         } else {
             return "productNotFound";
         }

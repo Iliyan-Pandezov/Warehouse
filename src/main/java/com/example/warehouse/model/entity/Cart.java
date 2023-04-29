@@ -1,9 +1,12 @@
 package com.example.warehouse.model.entity;
 
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 
+@Data
 @Entity
 @Table(name = "carts")
 public class Cart {
@@ -20,41 +23,6 @@ public class Cart {
     private User user;
 
     private int quantity;
-
-    public Cart() {
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
 
     @Transient
     public BigDecimal getSubtotal(){

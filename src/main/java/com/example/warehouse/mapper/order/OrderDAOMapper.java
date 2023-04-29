@@ -12,10 +12,12 @@ public class OrderDAOMapper implements Function<Order, OrderDAO> {
     public OrderDAO apply(Order order) {
         return new OrderDAO(
                 order.getId(),
+                order.getItems(),
                 order.getAddress(),
                 order.getUser(),
                 order.isCompleted(),
                 order.getSubmittedOn(),
+                order.getCompletedOn(),
                 order.getTotal(),
                 order.isCanceled()
         );

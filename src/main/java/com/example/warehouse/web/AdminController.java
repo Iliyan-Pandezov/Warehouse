@@ -1,5 +1,7 @@
 package com.example.warehouse.web;
 
+import com.example.warehouse.model.dao.order.OrderDAO;
+import com.example.warehouse.model.dao.order.OrderItemDAO;
 import com.example.warehouse.model.dto.CategoryDTO;
 import com.example.warehouse.model.dto.ProductDTO;
 import com.example.warehouse.model.entity.Category;
@@ -11,7 +13,9 @@ import com.example.warehouse.repository.RoleRepository;
 import com.example.warehouse.repository.UserRepository;
 import com.example.warehouse.service.CategoryService;
 import com.example.warehouse.service.ProductService;
+import com.example.warehouse.service.admin.AdminService;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -32,13 +36,15 @@ public class AdminController {
     private final ProductService productService;
     private final ProductRepository productRepository;
     private final RoleRepository roleRepository;
+    private final AdminService adminService;
 
-    public AdminController(UserRepository userRepository, CategoryService categoryService, ProductService productService, ProductRepository productRepository, RoleRepository roleRepository) {
+    public AdminController(UserRepository userRepository, CategoryService categoryService, ProductService productService, ProductRepository productRepository, RoleRepository roleRepository, AdminService adminService) {
         this.userRepository = userRepository;
         this.categoryService = categoryService;
         this.productService = productService;
         this.productRepository = productRepository;
         this.roleRepository = roleRepository;
+        this.adminService = adminService;
     }
 
     @PostMapping("/category")
@@ -65,6 +71,7 @@ public class AdminController {
         return "categoryTest";
 
     }
+
     @GetMapping("/users")
     public String listOfUsers() {
 
@@ -126,5 +133,48 @@ public class AdminController {
         return roleRepository.findAll();
     }
 
+    @GetMapping("/orders")
+    public String orders(Model model) {
 
+        List<OrderDAO> orderDAOList = adminService.listOfOrders();
+
+        model.addAttribute("orders", orderDAOList);
+
+        return "admin/admin_orders";
+    }
+
+    @GetMapping("/orders/pending")
+    public String ordersPending(Model model) {
+
+        List<OrderDAO> orderDAOList = adminService.listOfOrdersPending();
+
+        model.addAttribute("orders", orderDAOList);
+
+        return "admin/admin_orders_pending";
+    }
+    @GetMapping("/orders/completed")
+    public String ordersCompleted(Model model) {
+
+        List<OrderDAO> orderDAOList = adminService.listOfOrdersCompleted();
+
+        model.addAttribute("orders", orderDAOList);
+
+        return "admin/admin_orders_completed";
+    }
+
+    @GetMapping("/orders/{id}")
+    public String viewOrder(Model model, @PathVariable("id") Long id) {
+        OrderDAO order = adminService.order(id);
+        List<OrderItemDAO> items = adminService.orderItemList(order);
+        model.addAttribute("order", order);
+        model.addAttribute("items", items);
+
+        return "admin/admin_view_order";
+    }
+
+    @PostMapping("/orders/confirm/{id}")
+    public String confirmOrder(@PathVariable Long id) {
+        adminService.confirmOrder(id);
+        return "redirect:/admin/orders";
+    }
 }

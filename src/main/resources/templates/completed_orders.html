@@ -19,9 +19,9 @@
     <thead class="table-dark" data-bs-theme="dark">
     <tr>
         <th scope="col">Order Date</th>
-        <th scope="col">Number of items</th>
+        <th scope="col">Number of products</th>
         <th scope="col">Total</th>
-        <th scope="col">Order Status</th>
+        <th scope="col">Prepared On</th>
         <th scope="col">View Order</th>
         <th scope="col">Cancel Order</th>
     </tr>
@@ -38,8 +38,8 @@
         <td>
             [[*{order.total}]]
         </td>
-        <td>
-            [[*{order.isCompleted}]]
+        <td th:text="${#temporals.format(order.completedOn, 'dd-MMM-yyyy HH:mm')}">
+            [[*{order.completedOn}]]
         </td>
         <td>
             <a th:href="@{/users/orders/{id}(id=${order.id})}" class="btn btn-warning">View Order</a>

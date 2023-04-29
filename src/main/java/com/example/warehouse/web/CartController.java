@@ -46,6 +46,10 @@ public class CartController {
 
         User currentUser = authService.getCurrentlyLoggedInCustomer(authentication);
         Profile profile = profileRepository.findByUser(authService.getCurrentlyLoggedInCustomer(authentication));
+
+        if (profile==null){
+            return "redirect:/users/profile/create";
+        }
         ProfileDAO currentProfile = profileDAOMapper.apply(profile);
         List<AddressDAO> addressList = addressService.addressDAOList(profile);
         List<Cart> cartItems = cartService.listCartItems(currentUser);
@@ -56,29 +60,4 @@ public class CartController {
         return "cart";
     }
 
-//    @PostMapping("/cart/delete/{id}")
-//    public String removeAProduct(@PathVariable("id") Integer cartItemId,
-//                                 Authentication authentication) {
-//
-//        User currentUser = authService.getCurrentlyLoggedInCustomer(authentication);
-//        cartService.removeAProduct(cartItemId, currentUser);
-//
-//        return "redirect:/users/cart";
-//    }
-
-//    @PostMapping("/cart/add/{id}/{quantity}")
-//    public String addProductToCart(@PathVariable("id") Long productId,
-//                                   @PathVariable("quantity") Integer quantity,
-//                                   Authentication authentication) {
-//
-//        if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
-//            return "You must log in in order to add this product to your cart!";
-//        }
-//
-//        User currentUser = authService.getCurrentlyLoggedInCustomer(authentication);
-//
-//        Integer addedQuantity = cartService.addProduct(productId, quantity, currentUser);
-//
-//        return addedQuantity + " item(s) were added to your cart.";
-//    }
 }

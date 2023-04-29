@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title>Warehouse</title>
+    <th:block th:include="~{/fragments/head}"/>
+</head>
+<body>
+
+<th:block th:include="~{/fragments/header}"/>
+
+<div style="wrapper">
+    <main class="p-5 align-content-center bg-blur my-register-div">
+        <h1 class="border-bottom mb-5">Pending Orders</h1>
+    </main>
+</div>
+
+<h2>Pending Orders</h2>
+<table class="table table-striped table-hover">
+    <thead class="table-dark" data-bs-theme="dark">
+    <tr>
+        <th scope="col">Order Date</th>
+        <th scope="col">Customer</th>
+        <th scope="col">Total</th>
+        <th scope="col">View Order</th>
+    </tr>
+    </thead>
+
+    <tbody class="table-group-divider">
+    <tr th:each="order : ${orders}" th:if="${!order.isCompleted}">
+        <td th:text="${#dates.format(order.submittedOn, 'dd-MMM-yyyy HH:mm')}">
+            [[*{order.submittedOn}]]
+        </td>
+        <td>
+            [[*{order.user.getProfile().getFullName()}]]
+        </td>
+        <td>
+            [[*{order.total}]]
+        </td>
+        <td>
+            <a th:href="@{/admin/orders/{id}(id=${order.id})}" class="btn btn-warning">View Order</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<h2>Completed Orders</h2>
+<table class="table table-striped table-hover">
+    <thead class="table-dark" data-bs-theme="dark">
+    <tr>
+        <th scope="col">Order Date</th>
+        <th scope="col">Completed On</th>
+        <th scope="col">Customer</th>
+        <th scope="col">Total</th>
+        <th scope="col">View Order</th>
+    </tr>
+    </thead>
+
+    <tbody class="table-group-divider">
+    <tr th:each="order : ${orders}" th:if="${order.isCompleted}">
+        <td th:text="${#dates.format(order.submittedOn, 'dd-MMM-yyyy HH:mm')}">
+            [[*{order.submittedOn}]]
+        </td>
+        <td th:text="${#temporals.format(order.completedOn, 'dd-MMM-yyyy HH:mm')}">
+            [[*{order.completedOn}]]
+        </td>
+        <td>
+            [[*{order.user.getProfile().getFullName()}]]
+        </td>
+        <td>
+            [[*{order.total}]]
+        </td>
+        <td>
+            <a th:href="@{/admin/orders/{id}(id=${order.id})}" class="btn btn-warning">View Order</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

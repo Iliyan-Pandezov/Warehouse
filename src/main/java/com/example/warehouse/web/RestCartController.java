@@ -3,13 +3,15 @@ package com.example.warehouse.web;
 import com.example.warehouse.model.entity.User;
 import com.example.warehouse.service.AuthService;
 import com.example.warehouse.service.CartService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
-
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/users")
@@ -72,6 +74,5 @@ public class RestCartController {
         cartService.removeProduct(productId, currentUser.getId());
 
         return "The Product has been removed successfully from your shopping cart!";
-
     }
 }

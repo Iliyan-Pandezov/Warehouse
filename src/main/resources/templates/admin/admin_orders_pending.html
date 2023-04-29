@@ -11,7 +11,7 @@
 
 <div style="wrapper">
     <main class="p-5 align-content-center bg-blur my-register-div">
-        <h1 class="border-bottom mb-5">Orders</h1>
+        <h1 class="border-bottom mb-5">Pending Orders</h1>
     </main>
 </div>
 
@@ -24,6 +24,7 @@
         <th scope="col">Order Status</th>
         <th scope="col">View Order</th>
         <th scope="col">Cancel Order</th>
+        <th scope="col">Customer</th>
     </tr>
     </thead>
 
@@ -33,7 +34,7 @@
             [[*{order.submittedOn}]]
         </td>
         <td>
-            [[*{order.items.size()}]]
+
         </td>
         <td>
             [[*{order.total}]]
@@ -42,10 +43,13 @@
             [[*{order.isCompleted}]]
         </td>
         <td>
-            <a th:href="@{/users/orders/{id}(id=${order.id})}" class="btn btn-warning">View Order</a>
+            <a th:href="@{/admin/orders/pending/{id}(id=${order.id})}" class="btn btn-warning">View Order</a>
         </td>
         <td>
             <button class="btn btn-danger" type="submit">Cancel Order</button>
+        </td>
+        <td>
+            [[*{order.user.getProfile().getFullName()}]]
         </td>
     </tr>
     </tbody>

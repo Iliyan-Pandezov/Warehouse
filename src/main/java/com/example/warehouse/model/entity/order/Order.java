@@ -1,13 +1,14 @@
 package com.example.warehouse.model.entity.order;
 
-import com.example.warehouse.model.entity.Address;
 import com.example.warehouse.model.entity.User;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Data
@@ -18,8 +19,12 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
-    private Address address;
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<OrderItem> items;
+
+
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+    private ShippingAddress address;
 
     @ManyToOne
     private User user;
@@ -28,6 +33,8 @@ public class Order {
 
     @CreationTimestamp
     private Date submittedOn;
+
+    private LocalDateTime completedOn;
 
     private BigDecimal total;
 

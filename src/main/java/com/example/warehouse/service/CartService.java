@@ -5,6 +5,7 @@ import com.example.warehouse.model.entity.Product;
 import com.example.warehouse.model.entity.User;
 import com.example.warehouse.repository.CartRepository;
 import com.example.warehouse.repository.ProductRepository;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -16,10 +17,12 @@ import java.util.List;
 public class CartService {
     private final CartRepository cartRepository;
     private final ProductRepository productRepository;
+    private final AuthService authService;
 
-    public CartService(CartRepository cartRepository, ProductRepository productRepository) {
+    public CartService(CartRepository cartRepository, ProductRepository productRepository, AuthService authService) {
         this.cartRepository = cartRepository;
         this.productRepository = productRepository;
+        this.authService = authService;
     }
 
     public List<Cart> listCartItems(User user) {
@@ -53,16 +56,20 @@ public class CartService {
 
         Product currentProduct = productRepository.findById(productId).get();
 
-        BigDecimal subtotal = currentProduct.getPrice().multiply(BigDecimal.valueOf(quantity));
-
-        return subtotal;
+        return currentProduct.getPrice().multiply(BigDecimal.valueOf(quantity));
     }
 
     public void removeProduct(Long productId, Long userId) {
         cartRepository.deleteByProductAndCustomer(productId, userId);
     }
 
-    public void clearCart(User user){
+    public void clearCart(User user) {
         cartRepository.clearCartByUser(user.getId());
+    }
+
+    public int getItemCount(Authentication authentication) {
+        User user = authService.getCurrentlyLoggedInCustomer(authentication);
+        List<Cart> cart = cartRepository.findByUser(user);
+        return cart.size();
     }
 }

@@ -1,6 +1,10 @@
 package com.example.warehouse.web;
 
+import com.example.warehouse.mapper.AddressDAOMapper;
+import com.example.warehouse.mapper.order.ShippingAddressDAOMapper;
 import com.example.warehouse.model.dao.order.OrderDAO;
+import com.example.warehouse.model.dao.order.OrderItemDAO;
+import com.example.warehouse.model.dao.order.ShippingAddressDAO;
 import com.example.warehouse.model.entity.*;
 import com.example.warehouse.model.entity.order.Order;
 import com.example.warehouse.repository.AddressRepository;
@@ -17,6 +21,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/users")
@@ -30,8 +36,10 @@ public class OrderController {
     private final ProfileRepository profileRepository;
     private final OrderRepository orderRepository;
     private final OrderItemRepository orderItemRepository;
+    private final AddressDAOMapper addressDAOMapper;
+    private final ShippingAddressDAOMapper shippingAddressDAOMapper;
 
-    public OrderController(OrderService orderService, AuthService authService, CartService cartService, CartRepository cartRepository, AddressRepository addressRepository, ProfileRepository profileRepository, OrderRepository orderRepository, OrderItemRepository orderItemRepository) {
+    public OrderController(OrderService orderService, AuthService authService, CartService cartService, CartRepository cartRepository, AddressRepository addressRepository, ProfileRepository profileRepository, OrderRepository orderRepository, OrderItemRepository orderItemRepository, AddressDAOMapper addressDAOMapper, ShippingAddressDAOMapper shippingAddressDAOMapper) {
         this.orderService = orderService;
         this.authService = authService;
         this.cartService = cartService;
@@ -40,19 +48,33 @@ public class OrderController {
         this.profileRepository = profileRepository;
         this.orderRepository = orderRepository;
         this.orderItemRepository = orderItemRepository;
+        this.addressDAOMapper = addressDAOMapper;
+        this.shippingAddressDAOMapper = shippingAddressDAOMapper;
     }
 
 
-    @GetMapping("/orders")
-    public String orders(Authentication authentication, Model model) {
+    @GetMapping("/orders/pending")
+    public String pendingOrders(Authentication authentication, Model model) {
 
         User currentUser = authService.getCurrentlyLoggedInCustomer(authentication);
 
-        List<Order> customersOrders = orderRepository.findAllByUser(currentUser);
+        List<Order> pendingOrders = orderRepository.findAllByUserAndIsCompleted(currentUser, false);
 
-        model.addAttribute("orders", customersOrders);
+        model.addAttribute("orders", pendingOrders);
 
         return "pending_orders";
+    }
+
+    @GetMapping("/orders/completed")
+    public String completedOrders(Authentication authentication, Model model) {
+
+        User currentUser = authService.getCurrentlyLoggedInCustomer(authentication);
+
+        List<Order> completedOrders = orderRepository.findAllByUserAndIsCompleted(currentUser, true);
+
+        model.addAttribute("orders", completedOrders);
+
+        return "completed_orders";
     }
 
     @PostMapping("/orders/submit")
@@ -67,15 +89,32 @@ public class OrderController {
         }
         orderService.createOrder(currentUser, address, cartItemsForOrder);
 
-        return "redirect:/users/orders";
+        return "redirect:/users/orders/pending";
     }
 
     @GetMapping("/orders/{id}")
-    public String viewOrder(Model model,@PathVariable("id") Long orderId) {
-        Order currentOrder = orderRepository.getOrderById(orderId);
+    public String viewOrder(Authentication authentication, Model model, @PathVariable("id") Long orderId) {
+        User currentUser = authService.getCurrentlyLoggedInCustomer(authentication);
+        Optional<Order> optionalOrder = orderRepository.findOrderById(orderId);
+        Order currentOrder = new Order();
+        if (optionalOrder.isEmpty()) {
+            return "redirect:/";
+        } else {
+            currentOrder = optionalOrder.get();
+        }
+        if (!Objects.equals(currentOrder.getUser(), currentUser)) {
+            return "redirect:/";
+        }
         OrderDAO orderDAO = orderService.orderDAO(currentOrder);
 
-        model.addAttribute("order",orderDAO);
+        List<OrderItemDAO> orderItemList = orderItemRepository.findAllByOrderId(currentOrder.getId());
+
+        ShippingAddressDAO address = shippingAddressDAOMapper.apply(currentOrder.getAddress());
+
+
+        model.addAttribute("order", orderDAO);
+        model.addAttribute("address", address);
+        model.addAttribute("ordersItems", orderItemList);
 
         return "view_order";
     }

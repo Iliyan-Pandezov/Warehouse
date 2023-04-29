@@ -15,12 +15,12 @@
         <h1 class="border-bottom mb-5">Categories</h1>
     </main>
     <div class="d-flex justify-content-center">
-        <form class="registration-form"
+        <form
               th:action="@{/admin/category}"
               th:method="post"
               th:object="${categoryDTO}">
             <div class="col-auto">
-                <label for="inputName" class="col-form-label">Name</label>
+                <label for="inputName" class="col-form-label">Category Name</label>
             </div>
             <div class="col-auto">
                 <input type="text"
@@ -39,7 +39,7 @@
     <h1>Products list</h1>
 
     <table class="table table-striped">
-        <thead class="thead-dark">
+        <thead class="table-dark">
         <tr>
             <th scope="col">ID</th>
             <th scope="col">Name</th>

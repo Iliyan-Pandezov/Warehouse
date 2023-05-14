@@ -1,6 +1,7 @@
 package com.example.warehouse.model.entity;
 
 import lombok.Data;
+import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -10,6 +11,7 @@ import java.util.List;
 
 @Entity
 @Data
+@ToString
 @Table(name = "products")
 public class Product {
 

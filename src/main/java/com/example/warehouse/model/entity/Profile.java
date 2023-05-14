@@ -1,12 +1,14 @@
 package com.example.warehouse.model.entity;
 
 import lombok.Data;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
 @Data
+@ToString
 @Table(name = "profiles")
 public class Profile {
 

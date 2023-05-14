@@ -13,7 +13,7 @@ public interface AddressRepository  extends JpaRepository<Address, Long> {
     @Query(value = "SELECT * FROM Addresses a WHERE a.profile_id =?1", nativeQuery = true)
     List<Address> findByProfile(Long profileId);
 
-    Address findByName(String name);
+    Address findByAddressName(String addressName);
 
 }
 

@@ -1,8 +1,8 @@
 package com.example.warehouse.web;
 
 import com.example.warehouse.mapper.ProfileDAOMapper;
-import com.example.warehouse.model.dao.AddressDAO;
 import com.example.warehouse.model.dao.ProfileDAO;
+import com.example.warehouse.model.dto.AddressDTO;
 import com.example.warehouse.model.dto.ProfileDTO;
 import com.example.warehouse.model.entity.Profile;
 import com.example.warehouse.model.entity.User;
@@ -16,14 +16,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/users")
@@ -46,18 +44,6 @@ public class CustomerProfileController {
         this.addressService = addressService;
     }
 
-    @ModelAttribute("profileDTO")
-    public ProfileDTO initProfile() {
-        return new ProfileDTO();
-    }
-
-//    @ModelAttribute("addresses")
-//    public List<AddressDAO> customerAddresses(Authentication authentication) {
-//        User currentUser = authService.getCurrentlyLoggedInCustomer(authentication);
-//        Profile currentProfile = profileRepository.findByUser(currentUser);
-//        return addressRepository.findByProfile(currentProfile.getId());
-//    }
-
     @GetMapping("/profile")
     public String profile(Model model, Authentication authentication) {
         Profile profile = profileRepository.findByUser(authService.getCurrentlyLoggedInCustomer(authentication));
@@ -67,7 +53,7 @@ public class CustomerProfileController {
         }
 
         ProfileDAO currentProfile = profileDAOMapper.apply(profile);
-        List<AddressDAO> addressList = addressService.addressDAOList(profile);
+        List<AddressDTO> addressList = addressService.addressDAOList(profile);
         model.addAttribute(currentProfile);
         model.addAttribute("addresses", addressList);
 

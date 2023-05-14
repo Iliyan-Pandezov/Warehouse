@@ -1,33 +1,22 @@
 package com.example.warehouse.model.dto;
 
-import com.example.warehouse.model.entity.Address;
 import com.example.warehouse.model.entity.User;
-import lombok.Data;
 
 import javax.validation.constraints.NotEmpty;
-import java.util.Set;
 
-@Data
-public class ProfileDTO {
-    @NotEmpty(message = "First name has to be provided!")
-    private String firstName;
+public record ProfileDTO(
+        Long id,
 
-    @NotEmpty(message = "Last name has to be provided!")
-    private String lastName;
+        @NotEmpty(message = "First addressName has to be provided!")
+        String firstName,
 
-    @NotEmpty(message = "Phone number has to be provided")
-    private String phoneNumber;
+        @NotEmpty(message = "Last addressName has to be provided!")
+        String lastName,
 
-    private String town;
+        @NotEmpty(message = "Phone number has to be provided")
+        String phoneNumber,
 
-    private String neighbourhood;
-
-    private String streetName;
-
-    private String streetNumber;
-
-    private String buildingNumber;
-
-    private User user;
+        User user
+) {
 
 }

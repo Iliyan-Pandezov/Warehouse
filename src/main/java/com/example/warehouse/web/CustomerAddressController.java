@@ -6,9 +6,9 @@ import com.example.warehouse.service.AddressService;
 import com.example.warehouse.service.AuthService;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -28,14 +28,26 @@ public class CustomerAddressController {
     }
 
     @GetMapping("/address")
-    public String createAddress(){
+    public String createAddress(Model model) {
+        model.addAttribute("addressDTO", new AddressDTO(
+                null,
+                null,
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                ""));
         return "address_create";
     }
 
-    @ModelAttribute("addressDTO")
-    public AddressDTO initAddress() {
-        return new AddressDTO();
-    }
+//    @ModelAttribute("newAddressDTO")
+//    public NewAddressDTO initAddress() {
+//        return new NewAddressDTO();
+//    }
 
     @PostMapping("/address/create")
     public String addressCreate(@Valid AddressDTO addressDTO,

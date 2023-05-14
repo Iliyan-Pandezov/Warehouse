@@ -16,20 +16,22 @@ public class ProfileService {
 
     public void createProfile(User user, ProfileDTO profileDTO) {
 
+        // TODO check if profile is empty or not!
+
         Profile profile = profileRepository.findByUser(user);
 
         if (profile == null) {
             profile = new Profile();
             profile.setUser(user);
         }
-        if (profileDTO.getFirstName() != null) {
-            profile.setFirstName(profileDTO.getFirstName());
+        if (profileDTO.firstName() != null) {
+            profile.setFirstName(profileDTO.firstName());
         }
-        if (profileDTO.getLastName() != null) {
-            profile.setLastName(profileDTO.getLastName());
+        if (profileDTO.lastName() != null) {
+            profile.setLastName(profileDTO.lastName());
         }
-        if (profileDTO.getPhoneNumber() != null) {
-            profile.setPhoneNumber(profileDTO.getPhoneNumber());
+        if (profileDTO.phoneNumber() != null) {
+            profile.setPhoneNumber(profileDTO.phoneNumber());
         }
 
         profileRepository.save(profile);

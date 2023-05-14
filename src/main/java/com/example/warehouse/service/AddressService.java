@@ -1,7 +1,6 @@
 package com.example.warehouse.service;
 
 import com.example.warehouse.mapper.AddressDAOMapper;
-import com.example.warehouse.model.dao.AddressDAO;
 import com.example.warehouse.model.dto.AddressDTO;
 import com.example.warehouse.model.entity.Address;
 import com.example.warehouse.model.entity.Profile;
@@ -32,28 +31,29 @@ public class AddressService {
 
         Address address = new Address();
 
-        address.setName(addressDTO.getName());
-        address.setTown(addressDTO.getTown());
-        address.setNeighbourhood(addressDTO.getNeighbourhood());
-        address.setStreetName(addressDTO.getStreetName());
-        address.setStreetNumber(addressDTO.getStreetNumber());
-        address.setBuildingNumber(addressDTO.getBuildingNumber());
-        address.setEntrance(addressDTO.getEntrance());
-        address.setFloor(addressDTO.getFloor());
-        address.setApartment(addressDTO.getApartment());
+        address.setAddressName(addressDTO.addressName());
+        address.setTown(addressDTO.town());
+        address.setNeighbourhood(addressDTO.neighbourhood());
+        address.setStreetName(addressDTO.streetName());
+        address.setStreetNumber(addressDTO.streetNumber());
+        address.setBuildingNumber(addressDTO.buildingNumber());
+        address.setEntrance(addressDTO.entrance());
+        address.setFloor(addressDTO.floor());
+        address.setApartment(addressDTO.apartment());
         address.setProfile(profile);
 
         addressRepository.save(address);
     }
 
-    public List<AddressDAO> addressDAOList(Profile profile) {
+
+    public List<AddressDTO> addressDAOList(Profile profile) {
         List<Address> customerAddresses = addressRepository.findByProfile(profile.getId());
 
         return customerAddresses.stream()
-                .map(a -> new AddressDAO(
+                .map(a -> new AddressDTO(
                         a.getId(),
                         a.getProfile(),
-                        a.getName(),
+                        a.getAddressName(),
                         a.getTown(),
                         a.getNeighbourhood(),
                         a.getStreetName(),

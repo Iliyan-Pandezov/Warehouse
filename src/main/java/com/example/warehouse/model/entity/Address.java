@@ -1,11 +1,13 @@
 package com.example.warehouse.model.entity;
 
 import lombok.Data;
+import lombok.ToString;
 
 import javax.persistence.*;
 
 @Entity
 @Data
+@ToString
 @Table(name = "addresses")
 public class Address {
 
@@ -17,7 +19,7 @@ public class Address {
     @JoinColumn(name = "profile_id", nullable = false)
     private Profile profile;
 
-    private String name;
+    private String addressName;
 
     private String town;
 

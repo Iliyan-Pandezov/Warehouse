@@ -3,6 +3,7 @@ package com.example.warehouse.web;
 import com.example.warehouse.mapper.ProfileDAOMapper;
 import com.example.warehouse.model.dao.AddressDAO;
 import com.example.warehouse.model.dao.ProfileDAO;
+import com.example.warehouse.model.dto.AddressDTO;
 import com.example.warehouse.model.entity.Cart;
 import com.example.warehouse.model.entity.Profile;
 import com.example.warehouse.model.entity.User;
@@ -51,7 +52,7 @@ public class CartController {
             return "redirect:/users/profile/create";
         }
         ProfileDAO currentProfile = profileDAOMapper.apply(profile);
-        List<AddressDAO> addressList = addressService.addressDAOList(profile);
+        List<AddressDTO> addressList = addressService.addressDAOList(profile);
         List<Cart> cartItems = cartService.listCartItems(currentUser);
 
         model.addAttribute("cartItems", cartItems);

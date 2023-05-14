@@ -13,209 +13,214 @@
     <main class="p-5 align-content-center bg-blur my-register-div">
         <h1 class="border-bottom mb-5">Add Address</h1>
     </main>
-</div>
-<div class="d-flex justify-content-center ">
-    <div class="row g-3">
-        <form
-                th:action="@{/users/profile/address/create}"
-                th:method="post"
-                th:object="${addressDTO}">
 
-            <div>
-                <div class="col-auto">
-                    <label for="inputName" class="col-form-label ">Address Name</label>
+
+    <div class="d-flex justify-content-center ">
+        <div class="row g-3">
+            <form
+                    th:action="@{/users/profile/address/create}"
+                    th:method="post"
+                    th:object="${addressDTO}">
+
+                <div>
+                    <div class="col-auto">
+                        <label for="inputAddressName" class="col-form-label ">Address Name</label>
+                    </div>
+                    <div class="col-auto">
+                        <input name="addressName"
+                               th:field="*{addressName}"
+                               th:errorclass="is-invalid"
+
+
+                               type="text"
+                               id="inputAddressName"
+                               class="form-control"
+                               aria-describedby="addressNameHelpInline"/>
+
+                        <small class="bg-danger rounded text-white padding-2" th:if="${#fields.hasErrors('addressName')}"
+                               th:errorclass="is-invalid" th:errors="*{addressName}"/>
+
+                    </div>
                 </div>
-                <div class="col-auto">
-                    <input name="name"
-                           th:field="*{name}"
-                           th:errorclass="is-invalid"
+
+                <div>
+                    <div class="col-auto">
+                        <label for="inputTown" class="col-form-label ">Town</label>
+                    </div>
+                    <div class="col-auto">
+                        <input name="town"
+                               th:field="*{town}"
+                               th:errorclass="is-invalid"
 
 
-                           type="text"
-                           id="inputName"
-                           class="form-control"
-                           aria-describedby="nameHelpInline"/>
+                               type="text"
+                               id="inputTown"
+                               class="form-control"
+                               aria-describedby="townHelpInline"/>
 
-                    <small class="bg-danger rounded text-white padding-2" th:if="${#fields.hasErrors('name')}"
-                           th:errorclass="is-invalid" th:errors="*{name}"/>
+                        <small class="bg-danger rounded text-white padding-2" th:if="${#fields.hasErrors('town')}"
+                               th:errorclass="is-invalid" th:errors="*{town}"/>
 
+                    </div>
                 </div>
-            </div>
 
-            <div>
-                <div class="col-auto">
-                    <label for="inputTown" class="col-form-label ">Town</label>
+                <div>
+                    <div class="col-auto">
+                        <label for="inputNeighbourhood" class="col-form-label ">Neighbourhood</label>
+                    </div>
+                    <div class="col-auto">
+                        <input name="neighbourhood"
+                               th:field="*{neighbourhood}"
+                               th:errorclass="is-invalid"
+
+
+                               type="text"
+                               id="inputNeighbourhood"
+                               class="form-control"
+                               aria-describedby="neighbourhoodHelpInline"/>
+
+                        <small class="bg-danger rounded text-white padding-2"
+                               th:if="${#fields.hasErrors('neighbourhood')}"
+                               th:errorclass="is-invalid" th:errors="*{neighbourhood}"/>
+
+                    </div>
                 </div>
-                <div class="col-auto">
-                    <input name="town"
-                           th:field="*{town}"
-                           th:errorclass="is-invalid"
+
+                <div>
+                    <div class="col-auto">
+                        <label for="inputStreetName" class="col-form-label ">Street Name</label>
+                    </div>
+                    <div class="col-auto">
+                        <input name="streetName"
+                               th:field="*{streetName}"
+                               th:errorclass="is-invalid"
 
 
-                           type="text"
-                           id="inputTown"
-                           class="form-control"
-                           aria-describedby="townHelpInline"/>
+                               type="text"
+                               id="inputStreetName"
+                               class="form-control"
+                               aria-describedby="streetNameHelpInline"/>
 
-                    <small class="bg-danger rounded text-white padding-2" th:if="${#fields.hasErrors('town')}"
-                           th:errorclass="is-invalid" th:errors="*{town}"/>
+                        <small class="bg-danger rounded text-white padding-2" th:if="${#fields.hasErrors('streetName')}"
+                               th:errorclass="is-invalid" th:errors="*{streetName}"/>
 
+                    </div>
                 </div>
-            </div>
 
-            <div>
-                <div class="col-auto">
-                    <label for="inputNeighbourhood" class="col-form-label ">Neighbourhood</label>
+                <div>
+                    <div class="col-auto">
+                        <label for="inputStreetNumber" class="col-form-label ">Street Number</label>
+                    </div>
+                    <div class="col-auto">
+                        <input name="streetNumber"
+                               th:field="*{streetNumber}"
+                               th:errorclass="is-invalid"
+
+
+                               type="text"
+                               id="inputStreetNumber"
+                               class="form-control"
+                               aria-describedby="streetNumberHelpInline"/>
+
+                        <small class="bg-danger rounded text-white padding-2"
+                               th:if="${#fields.hasErrors('streetNumber')}"
+                               th:errorclass="is-invalid" th:errors="*{streetNumber}"/>
+
+                    </div>
                 </div>
-                <div class="col-auto">
-                    <input name="neighbourhood"
-                           th:field="*{neighbourhood}"
-                           th:errorclass="is-invalid"
+
+                <div>
+                    <div class="col-auto">
+                        <label for="inputBuildingNumber" class="col-form-label ">Building Number</label>
+                    </div>
+                    <div class="col-auto">
+                        <input name="buildingNumber"
+                               th:field="*{buildingNumber}"
+                               th:errorclass="is-invalid"
 
 
-                           type="text"
-                           id="inputNeighbourhood"
-                           class="form-control"
-                           aria-describedby="neighbourhoodHelpInline"/>
+                               type="text"
+                               id="inputBuildingNumber"
+                               class="form-control"
+                               aria-describedby="buildingNumberHelpInline"/>
 
-                    <small class="bg-danger rounded text-white padding-2" th:if="${#fields.hasErrors('neighbourhood')}"
-                           th:errorclass="is-invalid" th:errors="*{neighbourhood}"/>
+                        <small class="bg-danger rounded text-white padding-2"
+                               th:if="${#fields.hasErrors('buildingNumber')}"
+                               th:errorclass="is-invalid" th:errors="*{buildingNumber}"/>
 
+                    </div>
                 </div>
-            </div>
 
-            <div>
-                <div class="col-auto">
-                    <label for="inputStreetName" class="col-form-label ">Street Name</label>
+                <div>
+                    <div class="col-auto">
+                        <label for="inputEntrance" class="col-form-label ">Entrance</label>
+                    </div>
+                    <div class="col-auto">
+                        <input name="entrance"
+                               th:field="*{entrance}"
+                               th:errorclass="is-invalid"
+
+
+                               type="text"
+                               id="inputEntrance"
+                               class="form-control"
+                               aria-describedby="entranceHelpInline"/>
+
+                        <small class="bg-danger rounded text-white padding-2" th:if="${#fields.hasErrors('entrance')}"
+                               th:errorclass="is-invalid" th:errors="*{entrance}"/>
+
+                    </div>
                 </div>
-                <div class="col-auto">
-                    <input name="streetName"
-                           th:field="*{streetName}"
-                           th:errorclass="is-invalid"
+
+                <div>
+                    <div class="col-auto">
+                        <label for="inputFloor" class="col-form-label ">Floor</label>
+                    </div>
+                    <div class="col-auto">
+                        <input name="floor"
+                               th:field="*{floor}"
+                               th:errorclass="is-invalid"
 
 
-                           type="text"
-                           id="inputStreetName"
-                           class="form-control"
-                           aria-describedby="streetNameHelpInline"/>
+                               type="text"
+                               id="inputFloor"
+                               class="form-control"
+                               aria-describedby="floorHelpInline"/>
 
-                    <small class="bg-danger rounded text-white padding-2" th:if="${#fields.hasErrors('streetName')}"
-                           th:errorclass="is-invalid" th:errors="*{streetName}"/>
+                        <small class="bg-danger rounded text-white padding-2" th:if="${#fields.hasErrors('floor')}"
+                               th:errorclass="is-invalid" th:errors="*{floor}"/>
 
+                    </div>
                 </div>
-            </div>
 
-            <div>
-                <div class="col-auto">
-                    <label for="inputStreetNumber" class="col-form-label ">Street Number</label>
+                <div>
+                    <div class="col-auto">
+                        <label for="inputApartment" class="col-form-label ">Apartment Number</label>
+                    </div>
+                    <div class="col-auto">
+                        <input name="apartment"
+                               th:field="*{apartment}"
+                               th:errorclass="is-invalid"
+
+
+                               type="text"
+                               id="inputApartment"
+                               class="form-control"
+                               aria-describedby="apartmentHelpInline"/>
+
+                        <small class="bg-danger rounded text-white padding-2" th:if="${#fields.hasErrors('apartment')}"
+                               th:errorclass="is-invalid" th:errors="*{apartment}"/>
+
+                    </div>
                 </div>
-                <div class="col-auto">
-                    <input name="streetNumber"
-                           th:field="*{streetNumber}"
-                           th:errorclass="is-invalid"
 
-
-                           type="text"
-                           id="inputStreetNumber"
-                           class="form-control"
-                           aria-describedby="streetNumberHelpInline"/>
-
-                    <small class="bg-danger rounded text-white padding-2" th:if="${#fields.hasErrors('streetNumber')}"
-                           th:errorclass="is-invalid" th:errors="*{streetNumber}"/>
-
+                <div class="d-flex justify-content-center mt-4">
+                    <button class="btn btn-primary btn-block w-50" type="submit" id="registerButton">Add Address
+                    </button>
                 </div>
-            </div>
 
-            <div>
-                <div class="col-auto">
-                    <label for="inputBuildingNumber" class="col-form-label ">Building Number</label>
-                </div>
-                <div class="col-auto">
-                    <input name="buildingNumber"
-                           th:field="*{buildingNumber}"
-                           th:errorclass="is-invalid"
-
-
-                           type="text"
-                           id="inputBuildingNumber"
-                           class="form-control"
-                           aria-describedby="buildingNumberHelpInline"/>
-
-                    <small class="bg-danger rounded text-white padding-2" th:if="${#fields.hasErrors('buildingNumber')}"
-                           th:errorclass="is-invalid" th:errors="*{buildingNumber}"/>
-
-                </div>
-            </div>
-
-            <div>
-                <div class="col-auto">
-                    <label for="inputEntrance" class="col-form-label ">Entrance</label>
-                </div>
-                <div class="col-auto">
-                    <input name="entrance"
-                           th:field="*{entrance}"
-                           th:errorclass="is-invalid"
-
-
-                           type="text"
-                           id="inputEntrance"
-                           class="form-control"
-                           aria-describedby="entranceHelpInline"/>
-
-                    <small class="bg-danger rounded text-white padding-2" th:if="${#fields.hasErrors('entrance')}"
-                           th:errorclass="is-invalid" th:errors="*{entrance}"/>
-
-                </div>
-            </div>
-
-            <div>
-                <div class="col-auto">
-                    <label for="inputFloor" class="col-form-label ">Floor</label>
-                </div>
-                <div class="col-auto">
-                    <input name="floor"
-                           th:field="*{floor}"
-                           th:errorclass="is-invalid"
-
-
-                           type="text"
-                           id="inputFloor"
-                           class="form-control"
-                           aria-describedby="floorHelpInline"/>
-
-                    <small class="bg-danger rounded text-white padding-2" th:if="${#fields.hasErrors('floor')}"
-                           th:errorclass="is-invalid" th:errors="*{floor}"/>
-
-                </div>
-            </div>
-
-            <div>
-                <div class="col-auto">
-                    <label for="inputApartment" class="col-form-label ">Apartment Number</label>
-                </div>
-                <div class="col-auto">
-                    <input name="apartment"
-                           th:field="*{apartment}"
-                           th:errorclass="is-invalid"
-
-
-                           type="text"
-                           id="inputApartment"
-                           class="form-control"
-                           aria-describedby="apartmentHelpInline"/>
-
-                    <small class="bg-danger rounded text-white padding-2" th:if="${#fields.hasErrors('apartment')}"
-                           th:errorclass="is-invalid" th:errors="*{apartment}"/>
-
-                </div>
-            </div>
-
-            <div class="d-flex justify-content-center mt-4">
-                <button class="btn btn-primary btn-block w-50" type="submit" id="registerButton">Create Profile
-                </button>
-            </div>
-
-        </form>
+            </form>
+        </div>
     </div>
 </div>
 

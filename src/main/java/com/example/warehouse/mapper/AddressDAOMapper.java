@@ -14,7 +14,7 @@ public class AddressDAOMapper implements Function<Address, AddressDAO> {
         return new AddressDAO(
                 address.getId(),
                 address.getProfile(),
-                address.getName(),
+                address.getAddressName(),
                 address.getTown(),
                 address.getNeighbourhood(),
                 address.getStreetName(),

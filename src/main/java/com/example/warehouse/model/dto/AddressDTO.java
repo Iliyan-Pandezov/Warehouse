@@ -1,30 +1,32 @@
 package com.example.warehouse.model.dto;
 
 import com.example.warehouse.model.entity.Profile;
-import lombok.Data;
 
+import javax.validation.constraints.NotEmpty;
 
-@Data
-public class AddressDTO {
+public record AddressDTO (
+        Long id,
 
-    private Profile profile;
+        Profile profile,
 
-    private String name;
+        @NotEmpty(message = "Name has to be provided!")
+        String addressName,
 
-    private String town;
+        String town,
 
-    private String neighbourhood;
+        String neighbourhood,
 
-    private String streetName;
+        String streetName,
 
-    private String streetNumber;
+        String streetNumber,
 
-    private String buildingNumber;
+        String buildingNumber,
 
-    private String entrance;
+        String entrance,
 
-    private String floor;
+        String floor,
 
-    private String apartment;
+        String apartment
+){
 
 }

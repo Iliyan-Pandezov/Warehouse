@@ -62,7 +62,7 @@ public record AddressDAO(
         return address.toString();
 
 //        return "AddressDAO{" +
-//                "name='" + name + '\'' +
+//                "addressName='" + addressName + '\'' +
 //                ", town='" + town + '\'' +
 //                ", neighbourhood='" + neighbourhood + '\'' +
 //                ", streetName='" + streetName + '\'' +
